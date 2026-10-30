@@ -59,18 +59,18 @@ func _physics_process(delta: float) -> void:
 	pass
 
 
-static func newZombie() -> Monster2D:
+static func newZombie(_summoner:StringName = &"") -> Monster2D:
 	#const tag:StringName = "zombie"
 	var new_monster:Monster2D = MONSTER_BASE_SCENE.instantiate()
 	new_monster._set_config_by_tag("zombie")
-
+	new_monster.summoner = _summoner
 	return new_monster
 
-static func newGremlin()->Monster2D:
+static func newGremlin(_summoner:StringName = &"")->Monster2D:
 	#const tag:StringName = "gremlin"
 	var new_m:Monster2D = MONSTER_BASE_SCENE.instantiate()
 	new_m._set_config_by_tag("gremlin")
-
+	new_m.summoner = _summoner
 	return new_m
 
 
