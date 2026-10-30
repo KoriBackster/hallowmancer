@@ -5,7 +5,7 @@ script/source = "extends Node2D
 @onready var marker := get_node(^\"Marker2D\")
 
 func _ready() -> void:
-	var new_monster := Monster2D.newZombie()
+	var new_monster := Monster2D.newGremlin()
 
 	marker.add_child(new_monster)
 "

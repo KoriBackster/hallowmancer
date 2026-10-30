@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3 uid="uid://qdt5sckdpa7a"]
+
+[ext_resource type="Script" uid="uid://cvdx3p7u87xua" path="res://monster/monster_data.gd" id="1_p18s6"]
+[ext_resource type="Texture2D" uid="uid://p8pwdw41dyyw" path="res://raw/sprites/MoveMarker.png" id="2_qyedk"]
+
+[resource]
+script = ExtResource("1_p18s6")
+tag = &"gremlin"
+speed = 5.0
+damage = 5.0
+attack_range = 5.0
+texture = ExtResource("2_qyedk")
+metadata/_custom_type_script = "uid://cvdx3p7u87xua"

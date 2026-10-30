@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cfl5vheb5j6ya"]
+
+[ext_resource type="Script" uid="uid://dxlm3kytywn8y" path="res://monster/monster.gd" id="1_a5ngj"]
+[ext_resource type="Script" uid="uid://djn17u1bul83l" path="res://monster/tool_node.gd" id="2_wvf6p"]
+
+[node name="MonsterBase" type="CharacterBody2D" unique_id=1716401134]
+script = ExtResource("1_a5ngj")
+
+[node name="ToolNode" type="Node" parent="." unique_id=347084034]
+script = ExtResource("2_wvf6p")
+monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"oversampling_with_scale":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.2617994,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.7853982,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_a5ngj"),"active_data":null,"environment_responses":Array[Resource("res://monster/monster_response.gd")]([]))
+
+
+[node name="Skin" type="Sprite2D" parent="." unique_id=1510801558]
+unique_name_in_owner = true
