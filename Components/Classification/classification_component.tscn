@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cxlbqcaxgkkf"]
+
+[ext_resource type="Script" uid="uid://d3xosesu5fgt7" path="res://Components/Classification/classification_component.gd" id="1_d6de4"]
+
+[node name="ClassificationComponent" type="Node" unique_id=2018585701]
+script = ExtResource("1_d6de4")
