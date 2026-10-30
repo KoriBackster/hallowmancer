@@ -53,6 +53,7 @@ static func newZombie() -> Monster2D:
 	const _texture:Texture2D = preload(TEXTURE_DIR + _tag + TEXTURE_FILE_EXT)
 	var _env_resp:Array[monster_response] = CollectResponses(_tag)
 
+	#print("BNAR")
 	var new_monster:Monster2D = MONSTER_BASE_SCENE.instantiate()
 	new_monster._set_config(_tag, _speed, _damage, _range, _texture, _env_resp)
 
@@ -72,12 +73,18 @@ func _init(_nametag:StringName = DEFAULT_UNIT_TAG, _speed:float = DEFAULT_UNIT_S
 
 static func CollectResponses(m_tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
-	var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + m_tag
-	for file_name in DirAccess.get_files_at(dir_path):
+	#var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + m_tag
+	var dir_acc := DirAccess.open(ENVIRONMENT_RESPONSES_DIR)
+	if dir_acc.dir_exists(m_tag):
+		dir_acc.change_dir(m_tag)
+	else:
+		printerr("'%s' does not have a dedicated directory" %m_tag)
+	for file_name in dir_acc.get_files():
 		if file_name.ends_with("uid"):
+			#print(m_tag)
 			continue
-		# "get_files_at" gets ALL files, there is an alternative function that theoretically would eliminate the need to filter out "uid" files, but this folder should only have scripts inside it, so the basic filter should be good enough
-		var resp_script_path := dir_path.path_join(file_name)
+
+		var resp_script_path := dir_acc.get_current_dir().path_join(file_name)
 		var script_as_resource := load(resp_script_path)
 		var script_instance :monster_response= script_as_resource.new()
 		responses.append(script_instance)

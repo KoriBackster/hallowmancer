@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cfl5vheb5j6ya"]
 
 [ext_resource type="Script" uid="uid://dxlm3kytywn8y" path="res://monster/monster.gd" id="1_a5ngj"]
-[ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="2_f842g"]
 [ext_resource type="Script" uid="uid://djn17u1bul83l" path="res://monster/tool_node.gd" id="2_wvf6p"]
 
 [node name="MonsterBase" type="CharacterBody2D" unique_id=1716401134]
@@ -13,4 +12,3 @@ monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode
 
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1510801558]
-texture = ExtResource("2_f842g")
