@@ -7,8 +7,6 @@ const DATA_FILE:StringName = &"/data.tres"
 
 #const DEFAULT_UNIT_TAG:StringName = &"gremlin"
 
-
-# placeholder signal to remind me to implement the functionality... intended to send the collided object with a ref to itself...
 signal interaction(body:CharacterBody2D)
 
 @export var active_data:MonsterData
@@ -20,7 +18,7 @@ func _set_config_by_tag(tag:StringName):
 	var dir = DirAccess.open(MONSTER_ROOT_DIR)
 
 	if dir.dir_exists(tag):
-		monster_data = load(MONSTER_ROOT_DIR + "/%s" %tag + DATA_FILE)
+		monster_data = load(MONSTER_ROOT_DIR.path_join(tag) + DATA_FILE)
 	else:
 		active_data = null
 		environment_responses.clear()
