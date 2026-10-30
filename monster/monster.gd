@@ -5,11 +5,16 @@ const MONSTER_BASE_SCENE := preload(MONSTER_ROOT_DIR + "/monster_base.tscn")
 const ENVIRONMENT_RESPONSES_DIR :StringName = &"/environment_responses"
 const DATA_FILE:StringName = &"/data.tres"
 
+const COMPONENT_ROOT_DIR:StringName = &"res://Components"
 #const DEFAULT_UNIT_TAG:StringName = &"gremlin"
 
 signal interaction(body:CharacterBody2D)
 
 @export var active_data:MonsterData
+
+# This would be used for keeping track of "sides"...an enemy just check whether the object is on thier side, if not, is hostile.
+# Additionally, this allows for non-territory oriented
+var summoner:StringName
 @export_enum("ATTACKING", "DEFENDING") var side : String = "ATTACKING"
 
 @export_storage var environment_responses:Array[monster_response]
@@ -27,9 +32,20 @@ func _set_config_by_tag(tag:StringName):
 		return
 
 	active_data = monster_data
-	#environment_responses.assign(CollectResponses(tag))
 	environment_responses.assign(collectResponses(tag))
+	for key in active_data.component_keys:
+		dir = DirAccess.open(COMPONENT_ROOT_DIR)
+		var jordan_key:String = key.to_pascal_case()
 
+		if dir.dir_exists(jordan_key):
+			dir.change_dir(jordan_key)
+			for file in dir.get_files():
+				if file.ends_with(".uid") or file.ends_with(".gd"):
+					continue
+				elif file.ends_with(".tscn"):
+					var target_comp:PackedScene= load(dir.get_current_dir().path_join(file))
+					var inst_comp := target_comp.instantiate()
+					add_child(inst_comp)
 	%Skin.texture = active_data.texture
 
 
@@ -56,7 +72,7 @@ static func newGremlin()->Monster2D:
 
 	return new_m
 
-#static func CollectResponses(tag:StringName)->Array[monster_response]:
+
 static func collectResponses(tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
 	#var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + tag
@@ -66,10 +82,10 @@ static func collectResponses(tag:StringName)->Array[monster_response]:
 	else:
 		printerr("'%s' does not have a dedicated directory" %tag)
 	for file_name in dir_acc.get_files():
-		if file_name.ends_with("uid"):
+		if file_name.ends_with(".uid"):
 			#print(tag)
 			continue
-		
+
 		var resp_script_path := dir_acc.get_current_dir().path_join(file_name)
 		var script_as_resource := load(resp_script_path)
 		var script_instance :monster_response= script_as_resource.new()
