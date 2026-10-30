@@ -13,7 +13,8 @@ signal interaction(body:CharacterBody2D)
 @export var active_data:MonsterData
 
 # This would be used for keeping track of "sides"...an enemy just check whether the object is on thier side, if not, is hostile.
-# Additionally, this allows for non-territory oriented
+# Additionally, this allows for non-territory oriented entities (Neutral monster's or event-related competitions)
+
 var summoner:StringName
 @export_enum("ATTACKING", "DEFENDING") var side : String = "ATTACKING"
 
