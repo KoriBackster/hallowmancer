@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bmtyrvpc7qaae"]
+
+[ext_resource type="Script" uid="uid://n3yspwyy2rbj" path="res://Scenes/demo.gd" id="1_mkr8d"]
+[ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/Selection/selection_component.tscn" id="2_0q2ik"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bhunq"]
+vertices = PackedVector2Array(1008.15625, 518.1094, 1123.0703, 624.02344, 17.132813, 626.96875, 166.60938, 508.89063, 1127.9063, 18.101563, 1001.84375, 112.53906, 24.867188, 29.890625, 180.35938, 150.42969)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 2, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(15, 20, 7, 637, 1133, 634, 1138, 8)])
+
+[node name="PrototypeWorld" type="Node2D" unique_id=458308695]
+
+[node name="Demo" type="Button" parent="." unique_id=1211155171]
+offset_right = 36.0
+offset_bottom = 36.0
+text = "Spawn Demo"
+script = ExtResource("1_mkr8d")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=559537099]
+navigation_polygon = SubResource("NavigationPolygon_bhunq")
+
+[node name="Polygon2D" type="Polygon2D" parent="NavigationRegion2D" unique_id=176508640]
+polygon = PackedVector2Array(190, 160, 177, 499, 998, 508, 992, 123)
+
+[node name="SelectionComponent" parent="." unique_id=546658615 instance=ExtResource("2_0q2ik")]
+
+[connection signal="pressed" from="Demo" to="Demo" method="_on_pressed"]
