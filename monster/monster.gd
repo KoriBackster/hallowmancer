@@ -26,7 +26,7 @@ func _set_config_by_tag(tag:StringName):
 		return
 
 	active_data = monster_data
-	environment_responses.assign(CollectResponses(tag))
+	#environment_responses.assign(CollectResponses(tag))
 	environment_responses.assign(collectResponses(tag))
 
 	%Skin.texture = active_data.texture
@@ -55,7 +55,7 @@ static func newGremlin()->Monster2D:
 
 	return new_m
 
-static func CollectResponses(tag:StringName)->Array[monster_response]:
+#static func CollectResponses(tag:StringName)->Array[monster_response]:
 static func collectResponses(tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
 	#var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + tag
