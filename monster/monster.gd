@@ -27,9 +27,9 @@ func _set_config_by_tag(tag:StringName):
 
 	active_data = monster_data
 	environment_responses.assign(CollectResponses(tag))
+	environment_responses.assign(collectResponses(tag))
 
 	%Skin.texture = active_data.texture
-	# this is the current name of the node responsible for showing the texture, this will change when we add animations and need to replace the basic sprite2D node.
 
 
 func _ready() -> void:
@@ -56,6 +56,7 @@ static func newGremlin()->Monster2D:
 	return new_m
 
 static func CollectResponses(tag:StringName)->Array[monster_response]:
+static func collectResponses(tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
 	#var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + tag
 	var dir_acc := DirAccess.open(MONSTER_ROOT_DIR)
