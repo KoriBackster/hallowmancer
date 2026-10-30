@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dx1a3i8dncdvj"]
+
+[sub_resource type="GDScript" id="GDScript_5s8ec"]
+script/source = "extends Node2D
+@onready var marker := get_node(^\"Marker2D\")
+
+func _ready() -> void:
+	var new_monster := Monster2D.newZombie()
+
+	marker.add_child(new_monster)
+"
+
+[node name="Node2D" type="Node2D" unique_id=171645436]
+script = SubResource("GDScript_5s8ec")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1693250953]
+position = Vector2(381, 285)
