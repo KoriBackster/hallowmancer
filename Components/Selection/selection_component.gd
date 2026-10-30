@@ -10,7 +10,7 @@ var current_selection : CollisionShape2D
 var origin : Vector2
 var rect : Rect2
 
-var group_selection : Array[Minion]
+var group_selection : Array[Monster2D]
 
 func _process(_delta: float) -> void:
 	send_target()
@@ -47,8 +47,9 @@ func _process(_delta: float) -> void:
 	
 
 func add_to_group_selection() -> void:
-	for minion : Minion in range_component.objects_in_range:
-		if minion.what_side == minion.SIDES.ATTACKING:
+	group_selection.clear()
+	for minion : Monster2D in range_component.objects_in_range:
+		if minion.side == "ATTACKING":
 			group_selection.append(minion)
 	#print(group_selection)
 
@@ -57,8 +58,9 @@ func send_target() -> void:
 	
 	var mouse_pos := range_component.get_global_mouse_position()
 	
-	for minion in group_selection:
-		minion.navigation_component.target = mouse_pos
+	for minion : Monster2D in group_selection:
+		minion.get_node("NavigationComponent").target = mouse_pos
 	var c_marker = MOVE_MARKER.instantiate()
 	get_tree().current_scene.add_child(c_marker)
 	c_marker.global_position = mouse_pos
+	$MoveSound.play()
