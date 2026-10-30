@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Hallowmancer"
+run/main_scene="uid://bmtyrvpc7qaae"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,11 +20,9 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-<<<<<<< HEAD
 [file_customization]
 
 folder_colors={
-"res://monster/prefabs/zombie/": "red"
 "res://Components/": "green",
 "res://Resources/": "yellow",
 "res://Scenes/": "red",
@@ -44,8 +43,6 @@ select={
 ]
 }
 
-=======
->>>>>>> parent of 69a1a6a (Minion Composition Setup and Movement Navigation added)
 [physics]
 
 3d/physics_engine="Jolt Physics"
