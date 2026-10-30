@@ -10,6 +10,7 @@ const DATA_FILE:StringName = &"/data.tres"
 signal interaction(body:CharacterBody2D)
 
 @export var active_data:MonsterData
+@export_enum("ATTACKING", "DEFENDING") var side : String = "ATTACKING"
 
 @export_storage var environment_responses:Array[monster_response]
 
@@ -67,7 +68,7 @@ static func CollectResponses(tag:StringName)->Array[monster_response]:
 		if file_name.ends_with("uid"):
 			#print(tag)
 			continue
-
+		
 		var resp_script_path := dir_acc.get_current_dir().path_join(file_name)
 		var script_as_resource := load(resp_script_path)
 		var script_instance :monster_response= script_as_resource.new()

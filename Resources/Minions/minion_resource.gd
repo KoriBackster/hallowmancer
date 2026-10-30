@@ -7,5 +7,3 @@ class_name MinionResource
 @export var acceleration : float = 0.5
 @export var attack_range : float = 10.0
 @export var damage : float = 5.0
-
-@export var classifications : Array[GameManager.CLASSES]

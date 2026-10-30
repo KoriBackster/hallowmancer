@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://65hfq6ju5d0t"]
+
+[ext_resource type="Script" uid="uid://b6c0b70bw7xjg" path="res://Scenes/DemosAndPrototypes/lane_testing.gd" id="1_eiq81"]
+[ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/Selection/selection_component.tscn" id="2_ny3mh"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bhunq"]
+vertices = PackedVector2Array(1152.9219, 657.90625, 6.953125, 648.0781, 4.0390625, 5.9375, 1148.0703, 0.046875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-6, -4, 1158, -10, 1163, 668, -3, 658)])
+
+[node name="LaneTesting" type="Node2D" unique_id=1265734859]
+script = ExtResource("1_eiq81")
+
+[node name="PlayerSide" type="Marker2D" parent="." unique_id=398124856]
+position = Vector2(45, 312)
+
+[node name="EnemySide" type="Marker2D" parent="." unique_id=185759784]
+position = Vector2(1095, 312)
+
+[node name="SpawnAttack" type="Button" parent="." unique_id=781894879]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Spawn Attacking Minion"
+
+[node name="SpawnDefending" type="Button" parent="." unique_id=163659904]
+offset_left = 197.0
+offset_right = 392.0
+offset_bottom = 31.0
+text = "Spawn Defending Minion"
+
+[node name="SelectionComponent" parent="." unique_id=546658615 instance=ExtResource("2_ny3mh")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1573757246]
+navigation_polygon = SubResource("NavigationPolygon_bhunq")
+
+[connection signal="pressed" from="SpawnAttack" to="." method="_on_spawn_attack_pressed"]
+[connection signal="pressed" from="SpawnDefending" to="." method="_on_spawn_defending_pressed"]

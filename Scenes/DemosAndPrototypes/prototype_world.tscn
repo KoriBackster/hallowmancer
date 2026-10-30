@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bmtyrvpc7qaae"]
 
-[ext_resource type="Script" uid="uid://n3yspwyy2rbj" path="res://Scenes/demo.gd" id="1_mkr8d"]
+[ext_resource type="Script" uid="uid://n3yspwyy2rbj" path="res://Scenes/DemosAndPrototypes/demo.gd" id="1_mkr8d"]
 [ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/Selection/selection_component.tscn" id="2_0q2ik"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bhunq"]
