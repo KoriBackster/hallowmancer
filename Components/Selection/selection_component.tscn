@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bwncuu4coln6x"]
+
+[ext_resource type="Script" uid="uid://dj0j3883a8pjh" path="res://Components/Selection/selection_component.gd" id="1_rg42a"]
+[ext_resource type="PackedScene" uid="uid://bi5fj81r8h3kt" path="res://Components/Range/range_component.tscn" id="2_88lpu"]
+
+[node name="SelectionComponent" type="Node" unique_id=546658615]
+script = ExtResource("1_rg42a")
+
+[node name="RangeComponent" parent="." unique_id=270601989 instance=ExtResource("2_88lpu")]
+collision_layer = 0
+
+[node name="SelectionPolygon" type="Polygon2D" parent="." unique_id=1912360827]
+color = Color(0, 0.808573, 0.81106704, 0.37254903)
