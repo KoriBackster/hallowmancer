@@ -14,25 +14,25 @@ var group_selection : Array[Monster2D]
 
 func _process(_delta: float) -> void:
 	send_target()
-	
+
 	if not Input.is_action_pressed("select"):
 		if current_selection:
 			current_selection.queue_free()
 			add_to_group_selection()
 		selection_polygon.visible = false
 		return
-	
+
 	var mouse_pos : Vector2 = range_component.get_global_mouse_position()
 	selection_polygon.visible = true
-	
+
 	if not current_selection:
 		var new_selection = CollisionShape2D.new()
 		new_selection.shape = RectangleShape2D.new()
 		range_component.add_child(new_selection)
 		current_selection = new_selection
 		origin = mouse_pos
-		
-	
+
+
 	rect = Rect2(origin, Vector2.ZERO).expand(mouse_pos)
 	current_selection.global_position = rect.get_center()
 	current_selection.shape.size = rect.size
@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 		rect.size,
 		Vector2(0, rect.size.y),
 	])
-	
+
 
 func add_to_group_selection() -> void:
 	group_selection.clear()
@@ -55,9 +55,9 @@ func add_to_group_selection() -> void:
 
 func send_target() -> void:
 	if not Input.is_action_just_pressed("move"): return
-	
+
 	var mouse_pos := range_component.get_global_mouse_position()
-	
+
 	for minion : Monster2D in group_selection:
 		minion.get_node("NavigationComponent").target = mouse_pos
 	var c_marker = MOVE_MARKER.instantiate()

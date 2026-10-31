@@ -7,8 +7,8 @@ class_name HealthComponent
 	set(new_health):
 		if new_health > current_health: healed.emit(new_health)
 		else: damaged.emit(new_health)
-		
-		current_health = new_health 
+
+		current_health = new_health
 
 signal damaged(new_health)
 signal healed(new_health)

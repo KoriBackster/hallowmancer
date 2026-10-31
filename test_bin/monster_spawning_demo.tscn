@@ -6,8 +6,8 @@ script/source = "extends Node2D
 
 func _ready() -> void:
 	var new_monster := Monster2D.newGremlin()
-
-	marker.add_child(new_monster)
+	new_monster.global_position = marker.global_position
+	add_child(new_monster)
 "
 
 [node name="Node2D" type="Node2D" unique_id=171645436]
