@@ -3,6 +3,10 @@ class_name Gesture extends Node
 const GESTURE_DIR:StringName = &"res://gestures"
 const SAVED_GESTURES:StringName = &"/saved"
 const RESAMPLE_TARGET:int = 24
+const DEFAULT_LINE_COLOR:Color = Color.RED
+const DEFAULT_LINE_WIDTH:float = 5.0
+const GESTURE_ACCURACY_THRESHOLD:float = 0.5
+const GESTURE_COMPARISON_THRESHOLD:float = 0.2
 
 signal complete(gesture:Curve2D)
 
@@ -11,7 +15,7 @@ var line:Line2D
 
 func _init() -> void:
 	gesture = Curve2D.new()
-	line = createLine()
+	line = newLine()
 	add_child(line)
 
 func _input(event:InputEvent)->void:
@@ -21,7 +25,7 @@ func _input(event:InputEvent)->void:
 		line.points = gesture.get_baked_points()
 
 	if Input.is_action_just_released(&"select"):
-		line.points = PackedVector2Array(Resample(gesture))
+		line.points = PackedVector2Array(newResample(gesture))
 		line.reparent(get_parent())
 		finalize(gesture)
 	if Input.is_action_just_released(&"right click"):
@@ -32,20 +36,19 @@ func finalize(_output:Curve2D= null):
 	complete.emit(_output)
 	queue_free()
 
-static func createLine(color:Color = Color.RED, width:float = 5.0)->Line2D:
+static func newLine(color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->Line2D:
 	var _line:= Line2D.new()
 	_line.default_color = color
 	_line.width = width
 	return _line
 
-static func createLineFromGesture(_gesture:Curve2D, line_color:Color = Color.RED, line_width:float = 5.0 )->Line2D:
-	var shape_line:Line2D = Line2D.new()
-	shape_line.default_color = line_color
-	shape_line.width = line_width
-	shape_line.points = PackedVector2Array(Resample(_gesture))
-	return shape_line
+static func newLineFromGesture(_gesture:Curve2D, resampled:bool = true, color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->Line2D:
+	var _line  := newLine(color, width)
+	var point_list := PackedVector2Array(newResample(_gesture)) if resampled else _gesture.get_baked_points()
+	_line.points = point_list
+	return _line
 
-static func Resample(_gesture:Curve2D)->Array[Vector2]:
+static func newResample(_gesture:Curve2D)->Array[Vector2]:
 	var resampled_points_array:Array[Vector2] = []
 
 	if _gesture.get_baked_length() > 0:
@@ -73,7 +76,7 @@ static func Resample(_gesture:Curve2D)->Array[Vector2]:
 #
 	#for array:Array in vector_array:
 
-static func GetKnown()->Dictionary[StringName,GestureData]:
+static func getKnown()->Dictionary[StringName,GestureData]:
 	var known_gestures:Dictionary[StringName, GestureData] = {}
 	var dir := DirAccess.open(GESTURE_DIR + SAVED_GESTURES)
 	for file in dir.get_files():
@@ -91,9 +94,9 @@ static func Save(title:StringName, _gesture:Curve2D):
 
 	#print(prop)
 
-static func GetDirectionalGestureVector(_gesture:Curve2D)->Array[Vector2]:
+static func newDirectionalVector(_gesture:Curve2D)->Array[Vector2]:
 	var vector_array:Array[Vector2] = []
-	var resampled_gesture:= Resample(_gesture)
+	var resampled_gesture:= newResample(_gesture)
 	for point in resampled_gesture.size():
 		if point != 0:
 			var direction_to_previous: Vector2 = resampled_gesture[point].direction_to(resampled_gesture[point-1])
@@ -101,33 +104,43 @@ static func GetDirectionalGestureVector(_gesture:Curve2D)->Array[Vector2]:
 	return vector_array
 
 static func Verify(_gesture:Curve2D)->StringName:
-	var directional_vector_array:Array[Vector2] = GetDirectionalGestureVector(_gesture)
+	var incoming_directional:Array[Vector2] = newDirectionalVector(_gesture)
+
 	var identified:StringName = &""
 	var matches :int
-	var compare_offset:float = 0.2
+
+	#var compare_offset:float = 0.2
 
 	var similar_gestures_dict:Dictionary
 
-	var knownGestures:= GetKnown()
-	for known in knownGestures:
-		var csm:int = 0
-		var resamp:= Gesture.Resample(knownGestures[known].origin_gesture)
-		for index:int in resamp.size():
-			var vect := resamp[index]
-			if abs(vect.x - directional_vector_array[index].x) <= compare_offset and abs(vect.y - directional_vector_array[index].y) <= compare_offset:
-				csm += 1
-		matches = csm
+	var knownGestures:= getKnown()
+	for known_tag in knownGestures.keys():
+		#var resamp:= Resample()
+		var compare_directional:= newDirectionalVector(knownGestures[known_tag].origin_gesture)
+		if compare_directional.is_empty():
+			continue
 
-		var resampled_size:int = directional_vector_array.size()
-		var compare_accuracy:float = snappedf((float(matches)/ float(resampled_size)) * 100, 0.01)
-		var accuracy_percent:float = 50
-		if compare_accuracy >= accuracy_percent:
-			similar_gestures_dict[known] = compare_accuracy
+		var viable_matches:int = 0
+		#print(compare_directional)
+		for index:int in range(RESAMPLE_TARGET-1):
+			var incoming_vect := incoming_directional[index]
+			var resamp_vect := compare_directional[index]
+
+			if abs(resamp_vect.x - incoming_vect.x) <= GESTURE_COMPARISON_THRESHOLD and abs(resamp_vect.y - incoming_vect.y) <= GESTURE_COMPARISON_THRESHOLD:
+				viable_matches += 1
+		matches = viable_matches
+
+		#var resampled_size:int = directional_vector_array.size()
+
+		var compare_accuracy:float = snappedf((float(matches)/ float(RESAMPLE_TARGET)), 0.01)
+		#var accuracy_threshold:float = .5
+		if compare_accuracy >= GESTURE_ACCURACY_THRESHOLD:
+			similar_gestures_dict[known_tag] = compare_accuracy
 
 	var max_similarity:float = -1.0
-	for title:StringName in similar_gestures_dict:
+	for title in similar_gestures_dict.keys():
 		if similar_gestures_dict[title] > max_similarity:
-			max_similarity = similar_gestures_dict[title]
 			identified = title
+
 
 	return identified

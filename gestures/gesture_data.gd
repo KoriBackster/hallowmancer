@@ -4,7 +4,7 @@ class_name GestureData extends Resource
 @export var resample:Array[Vector2]:
 	get:
 		if resample.is_empty():
-			resample = Gesture.Resample(origin_gesture)
+			resample = Gesture.newResample(origin_gesture)
 		return resample
 
 func _init(gesture:Curve2D= Curve2D.new()) -> void:
