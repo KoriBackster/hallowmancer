@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://brp18mbquvxa0"]
+
+[ext_resource type="Script" uid="uid://g01j2dtfe6wr" path="res://gestures/gesture_creator.gd" id="1_7kopj"]
+
+[node name="GestureCreator" type="Control" unique_id=1836952410]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7kopj")
+gesture_name = &"triangle"
+
+[node name="Button" type="Button" parent="." unique_id=1862814145]
+layout_mode = 0
+offset_right = 226.0
+offset_bottom = 101.0
+text = "Start Gesture"
+
+[node name="Button2" type="Button" parent="." unique_id=846902328]
+layout_mode = 0
+offset_left = 886.0
+offset_top = 14.0
+offset_right = 1112.0
+offset_bottom = 115.0
+toggle_mode = true
+text = "FreeDraw"

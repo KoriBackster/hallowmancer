@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GestureData" format=3 uid="uid://cv4wgmkd8w45b"]
+
+[ext_resource type="Script" uid="uid://ccvjkd167yygy" path="res://gestures/gesture_data.gd" id="1_5grhh"]
+
+[sub_resource type="Curve2D" id="Curve2D_7kopj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 1
+
+[resource]
+script = ExtResource("1_5grhh")
+origin_gesture = SubResource("Curve2D_7kopj")
+metadata/_custom_type_script = "uid://ccvjkd167yygy"
