@@ -2,7 +2,7 @@ extends Node
 class_name MovementComponent
 
 @export var character : CharacterBody2D
-var max_speed : float
+var max_speed : float = 125.0
 var direction : Vector2
 var current_speed : float
 var acceleration : float

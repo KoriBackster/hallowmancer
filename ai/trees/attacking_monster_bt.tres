@@ -1,0 +1,24 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://bbsw12ggk646w"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_t4lfu"]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_t4lfu"]
+
+[sub_resource type="BTSequence" id="BTSequence_q5nes"]
+custom_name = "Over"
+children = [SubResource("BTAlwaysFail_t4lfu")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_v6mso"]
+text = "return running"
+
+[sub_resource type="BTSequence" id="BTSequence_ajncp"]
+custom_name = "Return"
+children = [SubResource("BTConsolePrint_v6mso")]
+
+[sub_resource type="BTSelector" id="BTSelector_q5nes"]
+custom_name = "AttackingUnit"
+children = [SubResource("BTSequence_q5nes"), SubResource("BTSequence_ajncp")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_t4lfu")
+root_task = SubResource("BTSelector_q5nes")

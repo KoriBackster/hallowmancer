@@ -36,7 +36,8 @@ func _set_config_by_tag(tag:StringName):
 func _ready() -> void:
 	#for resp in environment_responses:
 		#resp.legend()
-	pass
+	# FOR TESTING PURPOSE
+	_set_config_by_tag("gremlin")
 
 func _physics_process(delta: float) -> void:
 	pass

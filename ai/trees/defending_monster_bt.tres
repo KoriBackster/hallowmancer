@@ -1,0 +1,10 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://cawbwob4yuflw"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_hho8u"]
+
+[sub_resource type="BTSequence" id="BTSequence_hho8u"]
+custom_name = "Advance"
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_hho8u")
+root_task = SubResource("BTSequence_hho8u")
