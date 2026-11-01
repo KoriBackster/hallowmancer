@@ -16,7 +16,6 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	character.velocity = update_platform_speed(character.velocity) if using_gravity else update_topdown_speed(character.velocity)
-	print(character.velocity)
 	character.move_and_slide()
 
 func update_platform_speed(current_velocity: Vector2) -> Vector2:

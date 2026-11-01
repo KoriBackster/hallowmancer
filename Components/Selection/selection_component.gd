@@ -12,6 +12,8 @@ var rect : Rect2
 
 var group_selection : Array[Monster2D]
 
+signal moved(new_target: Vector2)
+
 func _process(_delta: float) -> void:
 	send_target()
 	
@@ -58,9 +60,11 @@ func send_target() -> void:
 	
 	var mouse_pos := range_component.get_global_mouse_position()
 	
-	for minion : Monster2D in group_selection:
-		minion.get_node("NavigationComponent").target = mouse_pos
+	# Commented this to debug and check out the movement sequence of limboai
+	#for minion : Monster2D in group_selection:
+	#	minion.get_node("NavigationComponent").target = mouse_pos
 	var c_marker = MOVE_MARKER.instantiate()
 	get_tree().current_scene.add_child(c_marker)
 	c_marker.global_position = mouse_pos
+	moved.emit(mouse_pos)
 	$MoveSound.play()

@@ -1,23 +1,75 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://bbsw12ggk646w"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_t4lfu"]
+var/NavigationComponent/name = &"NavigationComponent"
+var/NavigationComponent/type = 22
+var/NavigationComponent/value = NodePath("MonsterBase/NavigationComponent")
+var/NavigationComponent/hint = 0
+var/NavigationComponent/hint_string = ""
+var/Continuous/name = &"Continuous"
+var/Continuous/type = 1
+var/Continuous/value = true
+var/Continuous/hint = 0
+var/Continuous/hint_string = ""
+var/NavigationTarget/name = &"NavigationTarget"
+var/NavigationTarget/type = 5
+var/NavigationTarget/value = Vector2(0, 0)
+var/NavigationTarget/hint = 0
+var/NavigationTarget/hint_string = ""
 
-[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_t4lfu"]
+[sub_resource type="BBVariant" id="BBVariant_t4lfu"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_q5nes"]
+variable = &"Continuous"
+value = SubResource("BBVariant_t4lfu")
+
+[sub_resource type="BTFail" id="BTFail_t4lfu"]
+
+[sub_resource type="BTSequence" id="BTSequence_t4lfu"]
+custom_name = "Attack"
+children = [SubResource("BTFail_t4lfu")]
+
+[sub_resource type="BBVariant" id="BBVariant_q5nes"]
+saved_value = null
+resource_name = "(0.0, 0.0)"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_v6mso"]
+variable = &"NavigationTarget"
+check_type = 5
+value = SubResource("BBVariant_q5nes")
+
+[sub_resource type="BBNode" id="BBNode_t4lfu"]
+value_source = 1
+variable = &"NavigationComponent"
+resource_name = "$NavigationComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_q5nes"]
+node = SubResource("BBNode_t4lfu")
+method = &"find_nearest_target"
+
+[sub_resource type="BTSequence" id="BTSequence_v6mso"]
+custom_name = "Find New Target"
+children = [SubResource("BTCheckVar_v6mso"), SubResource("BTCallMethod_q5nes")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_t4lfu"]
+children = [SubResource("BTSequence_t4lfu"), SubResource("BTSequence_v6mso")]
 
 [sub_resource type="BTSequence" id="BTSequence_q5nes"]
 custom_name = "Over"
-children = [SubResource("BTAlwaysFail_t4lfu")]
+children = [SubResource("BTCheckVar_q5nes"), SubResource("BTDynamicSelector_t4lfu")]
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_v6mso"]
-text = "return running"
+[sub_resource type="BTFail" id="BTFail_q5nes"]
 
-[sub_resource type="BTSequence" id="BTSequence_ajncp"]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_mwwyw"]
 custom_name = "Return"
-children = [SubResource("BTConsolePrint_v6mso")]
+children = [SubResource("BTFail_q5nes")]
 
 [sub_resource type="BTSelector" id="BTSelector_q5nes"]
 custom_name = "AttackingUnit"
-children = [SubResource("BTSequence_q5nes"), SubResource("BTSequence_ajncp")]
+children = [SubResource("BTSequence_q5nes"), SubResource("BTDynamicSelector_mwwyw")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_t4lfu")
