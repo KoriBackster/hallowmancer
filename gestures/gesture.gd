@@ -1,22 +1,10 @@
 class_name Gesture extends Node
 
-const GESTURE_DIR:StringName = &"res://gestures"
-const SAVED_GESTURES:StringName = &"/saved"
-const RESAMPLE_TARGET:int = 24
-const DEFAULT_LINE_COLOR:Color = Color.RED
-const DEFAULT_LINE_WIDTH:float = 5.0
-const GESTURE_ACCURACY_THRESHOLD:float = 0.5
-const GESTURE_COMPARISON_THRESHOLD:float = 0.2
 
 signal complete(gesture:Curve2D)
 
 var gesture:Curve2D
 var line:Line2D
-
-func _init() -> void:
-	gesture = Curve2D.new()
-	line = newLine()
-	add_child(line)
 
 func _input(event:InputEvent)->void:
 
@@ -35,6 +23,19 @@ func _input(event:InputEvent)->void:
 func finalize(_output:Curve2D= null):
 	complete.emit(_output)
 	queue_free()
+
+func _init(color:Color=DEFAULT_LINE_COLOR) -> void:
+	gesture = Curve2D.new()
+	line = newLine(color)
+	add_child(line)
+
+const GESTURE_DIR:StringName = &"res://gestures"
+const SAVED_GESTURES:StringName = &"/saved"
+const RESAMPLE_TARGET:int = 24
+const DEFAULT_LINE_COLOR:Color = Color.RED
+const DEFAULT_LINE_WIDTH:float = 5.0
+const GESTURE_ACCURACY_THRESHOLD:float = 0.5
+const GESTURE_COMPARISON_THRESHOLD:float = 0.2
 
 static func newLine(color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->Line2D:
 	var _line:= Line2D.new()
@@ -59,23 +60,6 @@ static func newResample(_gesture:Curve2D)->Array[Vector2]:
 
 	return resampled_points_array
 
-#static func getVectorArrayFromGesture(_gesture:Curve2D)->Array[Vector2]:
-	#var vector_array:Array[Vector2]= []
-#
-	#var resampled_points_array:Array[Vector2] = resampleGesture(_gesture)
-#
-	#for point in resampled_points_array.size():
-		#if point > 0:
-			#var direction_to_previous:Vector2 = resampled_points_array[point].direction_to(resampled_points_array[point - 1])
-			#vector_array.append(direction_to_previous.snappedf(0.01))
-	#return vector_array
-
-#static func getAverageFromVectorArray(vector_array:Array[Vector2])->Array[Vector2]:
-	#var average_vector_array:Array[Vector2]= []
-	#var united_vector_array:Array[Vector2]= []
-#
-	#for array:Array in vector_array:
-
 static func getKnown()->Dictionary[StringName,GestureData]:
 	var known_gestures:Dictionary[StringName, GestureData] = {}
 	var dir := DirAccess.open(GESTURE_DIR + SAVED_GESTURES)
@@ -89,10 +73,6 @@ static func Save(title:StringName, _gesture:Curve2D):
 	var new_gesture := GestureData.new(_gesture)
 	new_gesture.resource_name = title
 	ResourceSaver.save(new_gesture, GESTURE_DIR + SAVED_GESTURES.path_join("%s.tres" %title))
-	#print(err)
-
-
-	#print(prop)
 
 static func newDirectionalVector(_gesture:Curve2D)->Array[Vector2]:
 	var vector_array:Array[Vector2] = []
@@ -108,8 +88,6 @@ static func Verify(_gesture:Curve2D)->StringName:
 
 	var identified:StringName = &""
 	var matches :int
-
-	#var compare_offset:float = 0.2
 
 	var similar_gestures_dict:Dictionary
 
@@ -142,5 +120,7 @@ static func Verify(_gesture:Curve2D)->StringName:
 		if similar_gestures_dict[title] > max_similarity:
 			identified = title
 
-
+	if identified.is_empty():
+		print("No Gesture Identified")
+		
 	return identified

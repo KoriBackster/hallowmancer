@@ -34,10 +34,9 @@ var active_gest:Gesture
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var free_draw_mode :bool = button_2.button_pressed
-
 	if free_draw_mode and not is_instance_valid(active_gest):
-			var gest := Gesture.new()
-			gest.complete.connect(func(v):
-				print(Gesture.Verify(v)))
-			add_sibling(gest)
-			active_gest = gest
+		var gest := Gesture.new()
+		gest.complete.connect(func(v):
+			print(Gesture.Verify(v)))
+		add_sibling(gest)
+		active_gest = gest
