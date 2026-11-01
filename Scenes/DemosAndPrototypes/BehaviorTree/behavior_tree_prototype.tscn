@@ -17,6 +17,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-18, -13, 1162, -28, 11
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_00ago"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+size = Vector2(1236, 72)
+
 [node name="BehaviorTreePrototype" type="Node2D" unique_id=1503356589]
 
 [node name="MonsterBase" parent="." unique_id=1716401134 instance=ExtResource("1_08wey")]
@@ -64,3 +67,10 @@ position = Vector2(20, 295)
 
 [node name="EnemyBase" parent="." unique_id=72918334 instance=ExtResource("7_m5wj7")]
 position = Vector2(1148, 300)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=364894934]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2093092805]
+position = Vector2(608, 370)
+shape = SubResource("RectangleShape2D_bhunq")
+debug_color = Color(0.9788212, 0, 0.39689732, 0.41960785)
