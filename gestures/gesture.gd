@@ -3,18 +3,20 @@ class_name Gesture extends Node
 
 signal complete(gesture:Curve2D)
 
+var persistant:bool = false
 var gesture:Curve2D
 var line:Line2D
 
 func _input(event:InputEvent)->void:
 
-	if event is InputEventMouseMotion and Input.is_action_pressed(&"select") and not gesture.get_baked_points().has(event.position):
+	if event is InputEventMouseMotion and Input.is_action_pressed(&"select") and (gesture.get_baked_points().is_empty() or not gesture.get_baked_points()[-1] == (event.position)):
 		gesture.add_point(event.position)
 		line.points = gesture.get_baked_points()
 
 	if Input.is_action_just_released(&"select"):
 		line.points = PackedVector2Array(newResample(gesture))
-		line.reparent(get_parent())
+		if persistant:
+			line.reparent(get_parent())
 		finalize(gesture)
 	if Input.is_action_just_released(&"right click"):
 		finalize()
@@ -24,18 +26,29 @@ func finalize(_output:Curve2D= null):
 	complete.emit(_output)
 	queue_free()
 
-func _init(color:Color=DEFAULT_LINE_COLOR) -> void:
+func _init(persistant_line:bool = false, color:Color=DEFAULT_LINE_COLOR) -> void:
 	gesture = Curve2D.new()
 	line = newLine(color)
+	persistant = persistant_line
 	add_child(line)
 
-const GESTURE_DIR:StringName = &"res://gestures"
 const SAVED_GESTURES:StringName = &"/saved"
-const RESAMPLE_TARGET:int = 24
-const DEFAULT_LINE_COLOR:Color = Color.RED
-const DEFAULT_LINE_WIDTH:float = 5.0
-const GESTURE_ACCURACY_THRESHOLD:float = 0.5
-const GESTURE_COMPARISON_THRESHOLD:float = 0.2
+
+static var GESTURE_DIR:StringName = &"res://gestures"
+static var RESAMPLE_TARGET:int = 24
+static var DEFAULT_LINE_COLOR:Color = Color.RED
+static var DEFAULT_LINE_WIDTH:float = 5.0
+static var GESTURE_ACCURACY_THRESHOLD:float = 0.5
+static var GESTURE_COMPARISON_THRESHOLD:float = 0.2
+
+static func _static_init() -> void:
+	#var config_file :GameConfig = Config
+	GESTURE_DIR = Config.GESTURE_DIR
+	RESAMPLE_TARGET = Config.GESTURE_RESAMPLE
+	DEFAULT_LINE_COLOR = Config.GESTURE_COLOR
+	DEFAULT_LINE_WIDTH = Config.GESTURE_WEIGHT
+	GESTURE_ACCURACY_THRESHOLD = Config.GESTURE_ACCURACY
+	GESTURE_COMPARISON_THRESHOLD = Config.GESTURE_COMPARISON
 
 static func newLine(color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->Line2D:
 	var _line:= Line2D.new()
@@ -84,9 +97,13 @@ static func newDirectionalVector(_gesture:Curve2D)->Array[Vector2]:
 	return vector_array
 
 static func Verify(_gesture:Curve2D)->StringName:
+	var identified:StringName = &""
+	if not _gesture or not _gesture.get_baked_length() > 0:
+		print("Invalid Gesture")
+		return identified
+	
 	var incoming_directional:Array[Vector2] = newDirectionalVector(_gesture)
 
-	var identified:StringName = &""
 	var matches :int
 
 	var similar_gestures_dict:Dictionary
@@ -94,7 +111,7 @@ static func Verify(_gesture:Curve2D)->StringName:
 	var knownGestures:= getKnown()
 	for known_tag in knownGestures.keys():
 		#var resamp:= Resample()
-		var compare_directional:= newDirectionalVector(knownGestures[known_tag].origin_gesture)
+		var compare_directional:= newDirectionalVector(knownGestures[known_tag].gesture)
 		if compare_directional.is_empty():
 			continue
 

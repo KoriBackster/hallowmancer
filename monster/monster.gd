@@ -1,12 +1,5 @@
 class_name Monster2D extends CharacterBody2D
 
-const MONSTER_ROOT_DIR :StringName = &"res://monster"
-const MONSTER_BASE_SCENE := preload(MONSTER_ROOT_DIR + "/monster_base.tscn")
-const ENVIRONMENT_RESPONSES_DIR :StringName = &"/environment_responses"
-const DATA_FILE:StringName = &"/data.tres"
-
-const COMPONENT_ROOT_DIR:StringName = &"res://Components"
-#const DEFAULT_UNIT_TAG:StringName = &"gremlin"
 
 signal interaction(body:CharacterBody2D)
 
@@ -14,24 +7,22 @@ signal interaction(body:CharacterBody2D)
 
 # This would be used for keeping track of "sides"...an enemy just check whether the object is on thier side, if not, is hostile.
 # Additionally, this allows for non-territory oriented entities (Neutral monster's or event-related competitions)
-
 var summoner:StringName
 @export_enum("ATTACKING", "DEFENDING") var side : String = "ATTACKING"
 
 @export_storage var environment_responses:Array[monster_response]
 
 func _set_config_by_tag(tag:StringName):
-	var monster_data:MonsterData
+	#var monster_data:MonsterData
 	var dir = DirAccess.open(MONSTER_ROOT_DIR)
 
-	if dir.dir_exists(tag):
-		monster_data = load(MONSTER_ROOT_DIR.path_join(tag) + DATA_FILE)
-	else:
+	if not dir.dir_exists(tag):
 		active_data = null
 		environment_responses.clear()
 		%Skin.texture = null
 		return
 
+	var monster_data := load(MONSTER_ROOT_DIR.path_join(tag) + DATA_FILE) as MonsterData
 	active_data = monster_data
 	environment_responses.assign(collectResponses(tag))
 	for key in active_data.component_keys:
@@ -58,6 +49,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	pass
 
+const MONSTER_ROOT_DIR :StringName = &"res://monster"
+const MONSTER_BASE_SCENE := preload(MONSTER_ROOT_DIR + "/monster_base.tscn")
+const ENVIRONMENT_RESPONSES_DIR :StringName = &"/environment_responses"
+const DATA_FILE:StringName = &"/data.tres"
+
+const COMPONENT_ROOT_DIR:StringName = &"res://Components"
+#const DEFAULT_UNIT_TAG:StringName = &"gremlin"
 
 static func newZombie(_summoner:StringName = &"") -> Monster2D:
 	#const tag:StringName = "zombie"
@@ -72,7 +70,6 @@ static func newGremlin(_summoner:StringName = &"")->Monster2D:
 	new_m._set_config_by_tag("gremlin")
 	new_m.summoner = _summoner
 	return new_m
-
 
 static func collectResponses(tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
