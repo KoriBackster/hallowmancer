@@ -4,6 +4,7 @@ const MONSTER_ROOT_DIR :StringName = &"res://monster"
 const MONSTER_BASE_SCENE := preload(MONSTER_ROOT_DIR + "/monster_base.tscn")
 const ENVIRONMENT_RESPONSES_DIR :StringName = &"/environment_responses"
 const DATA_FILE:StringName = &"/data.tres"
+const COMPONENTS_DIR:StringName = &"res://Components"
 
 #const DEFAULT_UNIT_TAG:StringName = &"gremlin"
 
@@ -32,12 +33,24 @@ func _set_config_by_tag(tag:StringName):
 	%Skin.texture = active_data.texture
 	# this is the current name of the node responsible for showing the texture, this will change when we add animations and need to replace the basic sprite2D node.
 
+func _add_components(monster: Monster2D) -> void:
+	var data : MonsterData = monster.active_data
+	for comp : StringName in data.component_keys:
+		var path := COMPONENTS_DIR.path_join(comp).path_join("%s_component.tscn" % comp)
+		if not ResourceLoader.exists(path):
+			printerr("Component not found: ", path)
+			continue
+		var scene := load(path) as PackedScene
+		monster.add_child(scene.instantiate())
+		
+
 
 func _ready() -> void:
 	#for resp in environment_responses:
 		#resp.legend()
 	# FOR TESTING PURPOSE
-	_set_config_by_tag("gremlin")
+	_set_config_by_tag("zombie")
+	_add_components(self)
 
 func _physics_process(delta: float) -> void:
 	pass

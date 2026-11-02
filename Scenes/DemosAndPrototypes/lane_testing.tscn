@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://65hfq6ju5d0t"]
 
 [ext_resource type="Script" uid="uid://b6c0b70bw7xjg" path="res://Scenes/DemosAndPrototypes/lane_testing.gd" id="1_eiq81"]
-[ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/Selection/selection_component.tscn" id="2_ny3mh"]
+[ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/selection/selection_component.tscn" id="2_ny3mh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bhunq"]
 vertices = PackedVector2Array(1152.9219, 657.90625, 6.953125, 648.0781, 4.0390625, 5.9375, 1148.0703, 0.046875)

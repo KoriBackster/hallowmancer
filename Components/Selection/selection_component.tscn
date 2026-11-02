@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bwncuu4coln6x"]
 
-[ext_resource type="Script" uid="uid://dj0j3883a8pjh" path="res://Components/Selection/selection_component.gd" id="1_rg42a"]
-[ext_resource type="PackedScene" uid="uid://bi5fj81r8h3kt" path="res://Components/Range/range_component.tscn" id="2_88lpu"]
+[ext_resource type="Script" uid="uid://dj0j3883a8pjh" path="res://Components/selection/selection_component.gd" id="1_rg42a"]
+[ext_resource type="PackedScene" uid="uid://bi5fj81r8h3kt" path="res://Components/range/range_component.tscn" id="2_88lpu"]
 [ext_resource type="AudioStream" uid="uid://dlxhrv06lse26" path="res://raw/audio/gohere.wav" id="3_r1rwd"]
 
 [node name="SelectionComponent" type="Node" unique_id=546658615]

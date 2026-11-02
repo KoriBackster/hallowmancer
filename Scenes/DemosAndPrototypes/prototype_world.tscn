@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmtyrvpc7qaae"]
 
 [ext_resource type="Script" uid="uid://n3yspwyy2rbj" path="res://Scenes/DemosAndPrototypes/demo.gd" id="1_mkr8d"]
-[ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/Selection/selection_component.tscn" id="2_0q2ik"]
+[ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/selection/selection_component.tscn" id="2_0q2ik"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bhunq"]
 vertices = PackedVector2Array(1008.15625, 518.1094, 1123.0703, 624.02344, 17.132813, 626.96875, 166.60938, 508.89063, 1127.9063, 18.101563, 1001.84375, 112.53906, 24.867188, 29.890625, 180.35938, 150.42969)

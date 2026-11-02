@@ -7,6 +7,10 @@ class_name NavigationComponent
 
 @onready var target : Vector2 = movement_component.character.global_position
 
+func _ready() -> void:
+	if get_tree().current_scene.find_child("EnemyBase"):
+		enemy_base = get_tree().current_scene.get_node("EnemyBase")
+
 func _process(_delta: float) -> void:
 	if not movement_component or not navigation_agent:
 		printerr("yo forgot yo components!", self)

@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dxlm3kytywn8y" path="res://monster/monster.gd" id="1_a5ngj"]
 [ext_resource type="Script" uid="uid://djn17u1bul83l" path="res://monster/tool_node.gd" id="2_wvf6p"]
+[ext_resource type="PackedScene" uid="uid://do8tjrsraeq3c" path="res://Components/health/health_component.tscn" id="3_mrgax"]
+[ext_resource type="PackedScene" uid="uid://yhmluvklodwb" path="res://Components/movement/movement_component.tscn" id="4_bhi4u"]
+[ext_resource type="PackedScene" uid="uid://cxk08qyvnfv6j" path="res://Components/navigation/navigation_component.tscn" id="5_yil1x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 
@@ -18,3 +21,14 @@ unique_name_in_owner = true
 
 [node name="TESTCOLLISIONSHAPE" type="CollisionShape2D" parent="." unique_id=135234189]
 shape = SubResource("CircleShape2D_bhunq")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=537181547]
+
+[node name="HealthComponent" parent="." unique_id=966977645 instance=ExtResource("3_mrgax")]
+
+[node name="MovementComponent" parent="." unique_id=1923321293 node_paths=PackedStringArray("character") instance=ExtResource("4_bhi4u")]
+character = NodePath("..")
+
+[node name="NavigationComponent" parent="." unique_id=996777 node_paths=PackedStringArray("movement_component", "navigation_agent") instance=ExtResource("5_yil1x")]
+movement_component = NodePath("../MovementComponent")
+navigation_agent = NodePath("../NavigationAgent2D")
