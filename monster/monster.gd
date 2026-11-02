@@ -14,7 +14,7 @@ var summoner:StringName
 
 func _set_config_by_tag(tag:StringName):
 	#var monster_data:MonsterData
-	var dir = DirAccess.open(MONSTER_ROOT_DIR)
+	var dir = DirAccess.open(MONSTER_DIR)
 
 	if not dir.dir_exists(tag):
 		active_data = null
@@ -22,11 +22,11 @@ func _set_config_by_tag(tag:StringName):
 		%Skin.texture = null
 		return
 
-	var monster_data := load(MONSTER_ROOT_DIR.path_join(tag) + DATA_FILE) as MonsterData
+	var monster_data := load(MONSTER_DIR.path_join(tag) + DATA_FILE) as MonsterData
 	active_data = monster_data
 	environment_responses.assign(collectResponses(tag))
 	for key in active_data.component_keys:
-		dir = DirAccess.open(COMPONENT_ROOT_DIR)
+		dir = DirAccess.open(COMPONENT_DIR)
 		var jordan_key:String = key.to_pascal_case()
 
 		if dir.dir_exists(jordan_key):
@@ -41,21 +41,22 @@ func _set_config_by_tag(tag:StringName):
 	%Skin.texture = active_data.texture
 
 
-func _ready() -> void:
-	#for resp in environment_responses:
-		#resp.legend()
-	pass
+static var MONSTER_DIR :StringName = &"res://monster"
+static var MONSTER_BASE_SCENE := load(MONSTER_DIR + "/monster_base.tscn")
+static var ENVIRONMENT_RESPONSE_DIR :StringName = &"/environment_responses"
+static var DATA_FILE:StringName = &"/data.tres"
 
-func _physics_process(delta: float) -> void:
-	pass
-
-const MONSTER_ROOT_DIR :StringName = &"res://monster"
-const MONSTER_BASE_SCENE := preload(MONSTER_ROOT_DIR + "/monster_base.tscn")
-const ENVIRONMENT_RESPONSES_DIR :StringName = &"/environment_responses"
-const DATA_FILE:StringName = &"/data.tres"
-
-const COMPONENT_ROOT_DIR:StringName = &"res://Components"
+static var COMPONENT_DIR:StringName = &"res://Components"
 #const DEFAULT_UNIT_TAG:StringName = &"gremlin"
+
+static func _static_init() -> void:
+	MONSTER_DIR = Config.MONSTER_DIR
+	MONSTER_BASE_SCENE = Config.MONSTER_BASE_SCENE
+	ENVIRONMENT_RESPONSE_DIR = Config.ENVIRONMENT_RESPONSE_DIR
+	DATA_FILE = Config.DATA_FILE
+	
+	COMPONENT_DIR = Config.COMPONENT_DIR
+
 
 static func newZombie(_summoner:StringName = &"") -> Monster2D:
 	#const tag:StringName = "zombie"
@@ -74,11 +75,12 @@ static func newGremlin(_summoner:StringName = &"")->Monster2D:
 static func collectResponses(tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
 	#var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + tag
-	var dir_acc := DirAccess.open(MONSTER_ROOT_DIR)
-	if dir_acc.dir_exists(tag):
-		dir_acc.change_dir(tag + ENVIRONMENT_RESPONSES_DIR)
+	var dir_acc := DirAccess.open(MONSTER_DIR)
+	if dir_acc.dir_exists(tag) and dir_acc.dir_exists(tag+ENVIRONMENT_RESPONSE_DIR):
+		dir_acc.change_dir(tag + ENVIRONMENT_RESPONSE_DIR)
 	else:
 		printerr("'%s' does not have a dedicated directory" %tag)
+		return []
 	for file_name in dir_acc.get_files():
 		if file_name.ends_with(".uid"):
 			#print(tag)
