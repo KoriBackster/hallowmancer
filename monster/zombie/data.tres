@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterData" format=3 uid="uid://doag0apto34mu"]
 
 [ext_resource type="Script" uid="uid://cvdx3p7u87xua" path="res://monster/monster_data.gd" id="1_c4yhm"]
-[ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="2_q8ns2"]
+[ext_resource type="Texture2D" uid="uid://bv3djb6f70dn3" path="res://raw/sprites/zombie_2.png" id="2_q8ns2"]
 
 [resource]
 script = ExtResource("1_c4yhm")

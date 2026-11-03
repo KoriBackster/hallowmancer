@@ -38,11 +38,13 @@ func _set_config_by_tag(tag:StringName):
 					var target_comp:PackedScene= load(dir.get_current_dir().path_join(file))
 					var inst_comp := target_comp.instantiate()
 					add_child(inst_comp)
+	
+	name = active_data.tag
 	%Skin.texture = active_data.texture
 
 
 static var MONSTER_DIR :StringName = &"res://monster"
-static var MONSTER_BASE_SCENE := load(MONSTER_DIR + "/monster_base.tscn")
+static var MONSTER_BASE_SCENE :PackedScene = load(MONSTER_DIR + "/monster_base.tscn")
 static var ENVIRONMENT_RESPONSE_DIR :StringName = &"/environment_responses"
 static var DATA_FILE:StringName = &"/data.tres"
 
@@ -72,12 +74,21 @@ static func newGremlin(_summoner:StringName = &"")->Monster2D:
 	new_m.summoner = _summoner
 	return new_m
 
+static func getMonsterList()->PackedStringArray:
+	#var monster_list:Array[StringName] = []
+	var dir_acc := DirAccess.open(MONSTER_DIR)
+	return dir_acc.get_directories()
+
+
 static func collectResponses(tag:StringName)->Array[monster_response]:
 	var responses :Array[monster_response] = []
 	#var dir_path :StringName = ENVIRONMENT_RESPONSES_DIR + tag
 	var dir_acc := DirAccess.open(MONSTER_DIR)
 	if dir_acc.dir_exists(tag) and dir_acc.dir_exists(tag+ENVIRONMENT_RESPONSE_DIR):
 		dir_acc.change_dir(tag + ENVIRONMENT_RESPONSE_DIR)
+	elif dir_acc.dir_exists(tag):
+		dir_acc.make_dir(tag + ENVIRONMENT_RESPONSE_DIR)
+		return []
 	else:
 		printerr("'%s' does not have a dedicated directory" %tag)
 		return []

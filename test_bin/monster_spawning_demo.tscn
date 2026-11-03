@@ -2,12 +2,59 @@
 
 [sub_resource type="GDScript" id="GDScript_5s8ec"]
 script/source = "extends Node2D
-@onready var marker := get_node(^\"Marker2D\")
+@onready var marker := $Marker2D
+
+@onready var monster_spawn_options:OptionButton = $MonsterSpawning
 
 func _ready() -> void:
-	var new_monster := Monster2D.newZombie()
+	monster_spawn_options.pressed.connect(func():
+		monster_spawn_options.clear()
+		var available_monsters:= Monster2D.getMonsterList()
+		for title in available_monsters:
+			monster_spawn_options.add_item(title.to_pascal_case())
+		
+		monster_spawn_options.select(-1)
+		)
+		
+	
+	monster_spawn_options.item_selected.connect(func(v):
+		for ch in get_tree().root.find_children(\"\", \"Monster2D\", true, false):
+			#print(ch.name)
+			ch.queue_free()
+		var selected_monster_name:= monster_spawn_options.get_item_text(v)
+		
+		example_of_manually_creating_a_monster_by_their_tag(selected_monster_name)
+		
+		)
+
+func example_of_creating_a_monster_via_macro(tag:StringName)->void:
+	# The monster tag would be irrelavent in the case of spawning as it is handled by the macro.
+	# the function simply takes the tag to make intent clear
+	tag = tag.to_snake_case()
+	
+	var new_monster:Monster2D
+	# Example of spawning a monster using the macro
+	match tag:
+		\"zombie\":
+			new_monster = Monster2D.newZombie()
+		\"gremlin\":
+			new_monster = Monster2D.newGremlin()
+	
 	new_monster.global_position = marker.global_position
 	add_child(new_monster)
+	
+
+func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
+	# The monster name needs to be identical to the monster's folder name...
+	# the monster's folder name is always snake_case; see String.to_snake_case()
+	tag = tag.to_snake_case()
+	# Example of spawning a monster manually using their tag
+	var new_monster:Monster2D = Monster2D.MONSTER_BASE_SCENE.instantiate()
+	new_monster._set_config_by_tag(tag)
+	
+	new_monster.global_position = marker.global_position
+	add_child(new_monster)
+	#
 "
 
 [node name="Node2D" type="Node2D" unique_id=171645436]
@@ -15,3 +62,10 @@ script = SubResource("GDScript_5s8ec")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1693250953]
 position = Vector2(381, 285)
+
+[node name="MonsterSpawning" type="OptionButton" parent="." unique_id=2094226154]
+offset_left = 72.0
+offset_top = 86.0
+offset_right = 249.0
+offset_bottom = 117.0
+allow_reselect = true

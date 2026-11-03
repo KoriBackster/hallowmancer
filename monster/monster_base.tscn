@@ -15,6 +15,8 @@ monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode
 
 [node name="Skin" type="Sprite2D" parent="." unique_id=1510801558]
 unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(8, 8)
 
 [node name="TESTCOLLISIONSHAPE" type="CollisionShape2D" parent="." unique_id=135234189]
 shape = SubResource("CircleShape2D_bhunq")
