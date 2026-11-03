@@ -52,6 +52,11 @@ func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
 	var new_monster:Monster2D = Monster2D.MONSTER_BASE_SCENE.instantiate()
 	new_monster._set_config_by_tag(tag)
 	
+	
+	var custom_scene:=PackedScene.new()
+	custom_scene.pack(new_monster)
+	ResourceSaver.save(custom_scene, Monster2D.MONSTER_DIR.path_join(tag).path_join(\"scene.tscn\"))
+	
 	new_monster.global_position = marker.global_position
 	add_child(new_monster)
 	#
