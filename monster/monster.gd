@@ -39,7 +39,7 @@ func _set_config_by_tag(tag:StringName):
 					var inst_comp := target_comp.instantiate()
 					add_child(inst_comp)
 	
-	name = active_data.tag
+	name = active_data.tag.to_pascal_case()
 	%Skin.texture = active_data.texture
 
 
