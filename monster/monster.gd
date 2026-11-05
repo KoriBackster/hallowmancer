@@ -1,9 +1,36 @@
 class_name Monster2D extends CharacterBody2D
 
+signal merge(Tag:StringName) # self yourself for the "merge_handler" to access your active_data...
+# ? How would the merge_handler determine which monster's have linked merge calls?
+#-> perhaps with a unique tag youd send with the merge signal so the handler can catch all related emitters 
+# in order for the handler to catch the signals, the handler must be listening for the signal... when the objects are created theyll automatically link their signals to the handler
+# So then, when you call a signal on an entity, you'd need to call that signal within an environment that maintains that unique emit signal
+# the handler is requested to create a call; for which, the request must contain a list of all relavent monsters.
+# perhaps via selection-system into an event-machine. -> click and drag, a set of monsters are selected (partitionable by a set of factors\
+# HIGH_LEVEL -> "Summoner"(enemy/ally/environmental/occasional), "Functionality"(flying/crawler/undead), "Formation Position"(leading, battling, transporting, traveling)
+# LOW_LEVEL -> "Stats"(speed/damage/position)
+signal death(Tag:StringName)
+signal creation(Tag:StringName)
 
-signal interaction(body:CharacterBody2D)
+signal interaction(Tag:StringName)
 
 @export var active_data:MonsterData
+var t_dir:Vector2
+
+func _physics_process(delta: float) -> void:
+	velocity = t_dir * active_data.speed
+	move_and_slide()
+func spawn()->void:
+	pass
+
+func die()->void:
+	death.emit()
+
+func take_step(over:int,fps:int)->void:
+	pass
+
+func deal_damage()->void:
+	pass
 
 # This would be used for keeping track of "sides"...an enemy just check whether the object is on thier side, if not, is hostile.
 # Additionally, this allows for non-territory oriented entities (Neutral monster's or event-related competitions)
@@ -22,7 +49,8 @@ func _set_config_by_tag(tag:StringName):
 		%Skin.texture = null
 		return
 
-	var monster_data := load(MONSTER_DIR.path_join(tag) + DATA_FILE) as MonsterData
+	var monster_data := ResourceLoader.load(MONSTER_DIR.path_join(tag) + DATA_FILE, "MonsterData")
+	#print(MONSTER_DIR.path_join(tag) + DATA_FILE)
 	active_data = monster_data
 	environment_responses.assign(collectResponses(tag))
 	for key in active_data.component_keys:

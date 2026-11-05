@@ -7,6 +7,7 @@ script/source = "extends Node2D
 @onready var monster_spawn_options:OptionButton = $MonsterSpawning
 
 func _ready() -> void:
+	#print(Monster2D.getMonsterList())
 	monster_spawn_options.pressed.connect(func():
 		monster_spawn_options.clear()
 		var available_monsters:= Monster2D.getMonsterList()
@@ -52,14 +53,34 @@ func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
 	var new_monster:Monster2D = Monster2D.MONSTER_BASE_SCENE.instantiate()
 	new_monster._set_config_by_tag(tag)
 	
-	
+	#var inherited_scene_path := Monster2D.MONSTER_DIR.path_join(\"monster_base.tscn\")
+	#var new_scene_path := Monster2D.MONSTER_DIR.path_join(tag).path_join(\"scene.tscn\")
+
+	#var scene_text := \"\"\"
+	#[gd_scene load_steps=2 format=3]
+#
+	#[ext_resource type=\"PackedScene\" path=\"%s\" id=\"1\"]
+#
+	#[node name=\"%s\" instance=ExtResource(\"1\")]
+	#\"\"\" % [inherited_scene_path, tag.to_pascal_case()]
+#
+	#var file := FileAccess.open(new_scene_path, FileAccess.WRITE)
+#
+	#if file:
+		#file.store_string(scene_text)
+		#file.close()
+	#
+	#var n_m = load(Monster2D.MONSTER_DIR.path_join(tag).path_join(\"scene.tscn\")) as PackedScene
+	#n_m = n_m.instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	##n_m.active_data = ResourceLoader.load(Monster2D.MONSTER_DIR.path_join(tag).path_join(\"data.tscn\"), \"MonsterData\")
+	#n_m._set_config_by_tag(tag)
 	#var custom_scene:=PackedScene.new()
 	#custom_scene.pack(new_monster)
+	##custom_scene.
 	#ResourceSaver.save(custom_scene, Monster2D.MONSTER_DIR.path_join(tag).path_join(\"scene.tscn\"))
 	
 	new_monster.global_position = marker.global_position
 	add_child(new_monster)
-	#
 "
 
 [node name="Node2D" type="Node2D" unique_id=171645436]

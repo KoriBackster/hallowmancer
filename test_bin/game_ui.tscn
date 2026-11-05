@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://cu8i7nx41rmnh"]
+
+[ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="1_4gh5o"]
+[ext_resource type="Script" uid="uid://va3twi4fulld" path="res://test_bin/game_ui.gd" id="1_cmnmt"]
+[ext_resource type="Texture2D" uid="uid://cty4ci47wvu45" path="res://raw/sprites/GLTYPH.png" id="2_3tu4y"]
+[ext_resource type="PackedScene" uid="uid://cngc1j0w7ilg" path="res://test_bin/game_world.tscn" id="3_qkrfw"]
+[ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="3_w2t7v"]
+
+[node name="GameUI" type="Control" unique_id=1158969537]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_cmnmt")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="TextureRect" parent="." unique_id=921237424]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("1_4gh5o")
+expand_mode = 1
+stretch_mode = 1
+flip_v = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1686162714]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameViewer" type="PanelContainer" parent="VBoxContainer" unique_id=936315943]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GameViewer" unique_id=182214109]
+layout_mode = 2
+
+[node name="LeftSideGraphic" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer" unique_id=176968516]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_w2t7v")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/GameViewer/HBoxContainer" unique_id=1368789651]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer" unique_id=1578077619]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(687, 238)
+render_target_update_mode = 4
+
+[node name="Node2D" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/SubViewport" unique_id=1600235309 instance=ExtResource("3_qkrfw")]
+
+[node name="ViewportBlinder" type="HBoxContainer" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer" unique_id=1640468862]
+layout_mode = 2
+
+[node name="LeftSideBlinder" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/ViewportBlinder" unique_id=1195434897]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BlindSpacer" type="Control" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/ViewportBlinder" unique_id=1836732316]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RightSideBlinder" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/ViewportBlinder" unique_id=1586396963]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightSideGraphic" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer" unique_id=881013662]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_w2t7v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1012712632]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+
+[node name="ManaPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=999179012]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/ManaPanel" unique_id=972319244]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer" unique_id=1330720683]
+layout_mode = 2
+
+[node name="ManaLabel" type="Label" parent="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer" unique_id=309566567]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "1231231"
+
+[node name="ManaPool" type="ProgressBar" parent="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer" unique_id=1064611478]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+max_value = 20.0
+value = 7.26
+fill_mode = 3
+show_percentage = false
+
+[node name="GlyphGuide2" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=803489564]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+texture = ExtResource("2_3tu4y")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MonsterSummonsBackgroun" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1947075194]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+metadata/_edit_use_anchors_ = true
+
+[node name="MonsterSummonMargin" type="MarginContainer" parent="VBoxContainer/HBoxContainer/MonsterSummonsBackgroun" unique_id=1004981151]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
+metadata/_edit_use_anchors_ = true
+
+[node name="MonsterSummonsList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin" unique_id=1816535134]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AddNewMonster" type="Button" parent="VBoxContainer/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin/MonsterSummonsList" unique_id=1241131103]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+"
+
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer/ManaPool" to="." method="_on_mana_pool_value_changed"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/GlyphGuide2" to="." method="_on_glyph_guide_2_gui_input"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/GlyphGuide2" to="." method="_on_glyph_guide_2_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/GlyphGuide2" to="." method="_on_glyph_guide_2_mouse_exited"]

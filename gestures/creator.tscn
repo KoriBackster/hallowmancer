@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://brp18mbquvxa0"]
 
 [ext_resource type="Script" uid="uid://g01j2dtfe6wr" path="res://gestures/creator.gd" id="1_jyo3s"]
-[ext_resource type="Texture2D" uid="uid://cty4ci47wvu45" path="res://raw/sprites/GLTYPH.png" id="2_kx6h2"]
+[ext_resource type="PackedScene" uid="uid://d2lyb2mprqmhn" path="res://gestures/glyph_guide.tscn" id="2_kx6h2"]
 
 [node name="GestureCreator" type="Control" unique_id=1836952410]
 layout_mode = 3
@@ -36,9 +36,8 @@ offset_right = 210.0
 offset_bottom = 141.0
 placeholder_text = "Gesture Name"
 
-[node name="GlyphGuide" type="Sprite2D" parent="." unique_id=1184403729]
+[node name="GlyphGuide" parent="." unique_id=476362931 instance=ExtResource("2_kx6h2")]
 position = Vector2(521, 328)
-texture = ExtResource("2_kx6h2")
 
 [node name="OptionButton" type="OptionButton" parent="." unique_id=1743632887]
 layout_mode = 0

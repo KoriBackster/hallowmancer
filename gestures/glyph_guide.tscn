@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d2lyb2mprqmhn"]
+
+[ext_resource type="Texture2D" uid="uid://cty4ci47wvu45" path="res://raw/sprites/GLTYPH.png" id="1_cx10p"]
+
+[node name="GlyphGuide" type="Sprite2D" unique_id=476362931]
+texture = ExtResource("1_cx10p")
