@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://d1y7k488krw8v"]
 
+[ext_resource type="Script" uid="uid://boyj3uhkxc1gl" path="res://Scenes/MainMenu/main_menu.gd" id="1_0qgbs"]
 [ext_resource type="FontFile" uid="uid://bkinaargo3ivm" path="res://Fonts/Ithaca-LVB75.ttf" id="1_uqdog"]
+[ext_resource type="PackedScene" uid="uid://c8pbhose5sor0" path="res://test_bin/monster_spawning_demo.tscn" id="2_adu2g"]
 [ext_resource type="Texture2D" uid="uid://dngo4n5w7tum" path="res://raw/sprites/zombie.png" id="2_qgdf6"]
 [ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="3_0qgbs"]
 
@@ -24,6 +26,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0qgbs")
+first_level = ExtResource("2_adu2g")
 
 [node name="BG" type="Panel" parent="." unique_id=1879751079]
 layout_mode = 1
@@ -87,3 +91,5 @@ offset_right = 1049.0
 offset_bottom = 250.0
 texture = ExtResource("3_0qgbs")
 flip_h = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
