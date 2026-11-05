@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cngc1j0w7ilg"]
 
-[ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="1_aohac"]
 [ext_resource type="Script" uid="uid://5kvg4sn7i1hw" path="res://test_bin/game_world.gd" id="1_sfdxe"]
 [ext_resource type="Texture2D" uid="uid://caxxmyny2giw1" path="res://raw/sprites/tower.png" id="3_arl2k"]
 [ext_resource type="Script" uid="uid://dafxidwjot6bb" path="res://test_bin/tower.gd" id="4_arl2k"]
@@ -11,20 +10,15 @@
 script = ExtResource("1_sfdxe")
 towers = [NodePath("HomeTower"), NodePath("EnemyTower")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1594560880]
-position = Vector2(517, 289)
-scale = Vector2(2.9453125, 2.65625)
-texture = ExtResource("1_aohac")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2103565988]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1016064311]
-position = Vector2(0, 459)
+position = Vector2(0, 327)
 shape = SubResource("WorldBoundaryShape2D_07orm")
 
 [node name="HomeTower" type="Sprite2D" parent="." unique_id=1120883498]
 texture_filter = 1
-position = Vector2(31, 459)
+position = Vector2(31, 321)
 scale = Vector2(4, 4)
 texture = ExtResource("3_arl2k")
 offset = Vector2(0, -16)
@@ -34,8 +28,12 @@ target_right = true
 
 [node name="EnemyTower" type="Sprite2D" parent="." unique_id=17285777]
 texture_filter = 1
-position = Vector2(1083, 458)
+position = Vector2(1083, 320)
 scale = Vector2(4, 4)
 texture = ExtResource("3_arl2k")
 offset = Vector2(0, -16)
 script = ExtResource("4_arl2k")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=396103294]
+position = Vector2(529, 154)
+zoom = Vector2(1.905, 1.905)

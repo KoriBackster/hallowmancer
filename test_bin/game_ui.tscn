@@ -4,10 +4,24 @@
 [ext_resource type="Script" uid="uid://va3twi4fulld" path="res://test_bin/game_ui.gd" id="1_cmnmt"]
 [ext_resource type="PackedScene" uid="uid://cngc1j0w7ilg" path="res://test_bin/game_world.tscn" id="3_qkrfw"]
 [ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="3_w2t7v"]
-[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://gestures/glyph_guide.tscn" id="5_3tu4y"]
-[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="6_cmnmt"]
+[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://gestures/glyph_guide.tscn" id="5_3tu4y"]
+[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://gestures/glyph_preview_data.gd" id="5_c5p77"]
+[ext_resource type="Texture2D" uid="uid://ckofh420ix81u" path="res://raw/sprites/zombie_icon.png" id="5_fy0d5"]
+[ext_resource type="Texture2D" uid="uid://canswtmw6fy5b" path="res://raw/sprites/UI books & more.png" id="6_c5p77"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gc083"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Resource" id="Resource_ht0hg"]
+resource_local_to_scene = true
+script = ExtResource("5_c5p77")
+offset = Vector2(-200, -60)
+weight = 2.4
+alpha = 0.4
+metadata/_custom_type_script = "uid://cvojg5v57ctgh"
 
 [node name="GameUI" type="Control" unique_id=1158969537]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,21 +30,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_cmnmt")
-metadata/_edit_lock_ = true
-
-[node name="Background" type="TextureRect" parent="." unique_id=921237424]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
-texture = ExtResource("1_4gh5o")
-expand_mode = 1
-stretch_mode = 1
-flip_v = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1686162714]
 layout_mode = 1
@@ -40,81 +39,138 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameViewer" type="PanelContainer" parent="VBoxContainer" unique_id=936315943]
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GameViewer" unique_id=182214109]
-layout_mode = 2
-
-[node name="LeftSideGraphic" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer" unique_id=176968516]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_w2t7v")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/GameViewer/HBoxContainer" unique_id=1368789651]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer" unique_id=1578077619]
-disable_3d = true
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(687, 238)
-render_target_update_mode = 4
-
-[node name="Node2D" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/SubViewport" unique_id=1600235309 instance=ExtResource("3_qkrfw")]
-
-[node name="ViewportBlinder" type="HBoxContainer" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer" unique_id=1640468862]
-layout_mode = 2
-
-[node name="LeftSideBlinder" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/ViewportBlinder" unique_id=1195434897]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BlindSpacer" type="Control" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/ViewportBlinder" unique_id=1836732316]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="RightSideBlinder" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer/SubViewportContainer/ViewportBlinder" unique_id=1586396963]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RightSideGraphic" type="TextureRect" parent="VBoxContainer/GameViewer/HBoxContainer" unique_id=881013662]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_w2t7v")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1012712632]
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=83230310]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.2
 
-[node name="ManaPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=999179012]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control" unique_id=1526455236]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_gc083")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Control" unique_id=182214109]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Control/HBoxContainer2" unique_id=281531061]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/Control/HBoxContainer2" unique_id=166387629]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/Control/HBoxContainer2" unique_id=1068065912]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/Control" unique_id=202605106]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="LeftSideGraphic" type="TextureRect" parent="VBoxContainer/Control/HBoxContainer3" unique_id=1870849540]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_w2t7v")
+
+[node name="Control" type="Control" parent="VBoxContainer/Control/HBoxContainer3" unique_id=1343255126]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="RightSideGraphic" type="TextureRect" parent="VBoxContainer/Control/HBoxContainer3" unique_id=1029336341]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_w2t7v")
+
+[node name="Control2" type="Control" parent="VBoxContainer" unique_id=1527229517]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="VBoxContainer/Control2" unique_id=921237424]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("1_4gh5o")
+expand_mode = 1
+stretch_mode = 1
+flip_v = true
+
+[node name="GlyphGuide" parent="VBoxContainer/Control2" unique_id=2076778207 instance=ExtResource("5_3tu4y")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 0
+expand_mode = 3
+glyph_preview_data = SubResource("Resource_ht0hg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control2" unique_id=1012712632]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+mouse_filter = 2
+
+[node name="ManaPanel" type="PanelContainer" parent="VBoxContainer/Control2/HBoxContainer" unique_id=999179012]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.2
+mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/ManaPanel" unique_id=972319244]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control2/HBoxContainer/ManaPanel" unique_id=972319244]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer" unique_id=1330720683]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Control2/HBoxContainer/ManaPanel/MarginContainer" unique_id=1330720683]
 layout_mode = 2
 
-[node name="ManaLabel" type="Label" parent="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer" unique_id=309566567]
+[node name="ManaLabel" type="Label" parent="VBoxContainer/Control2/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer" unique_id=309566567]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "1231231"
 
-[node name="ManaPool" type="ProgressBar" parent="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer" unique_id=1064611478]
+[node name="ManaPool" type="ProgressBar" parent="VBoxContainer/Control2/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer" unique_id=1064611478]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -124,25 +180,20 @@ value = 7.26
 fill_mode = 3
 show_percentage = false
 
-[node name="GlyphGuide" parent="VBoxContainer/HBoxContainer" unique_id=2076778207 instance=ExtResource("5_3tu4y")]
-unique_name_in_owner = true
+[node name="Control" type="Control" parent="VBoxContainer/Control2/HBoxContainer" unique_id=106918624]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-expand_mode = 3
-glyph_preview_data = ExtResource("6_cmnmt")
-glyph_preview_scale = Vector2(0.695, 0.695)
-glyph_preview_offset = Vector2(-78, -56)
-glyph_preview_weight = 2.0
-glyph_preview_alpha = 0.4
+mouse_filter = 2
 
-[node name="MonsterSummonsBackgroun" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1947075194]
+[node name="MonsterSummonsBackgroun" type="PanelContainer" parent="VBoxContainer/Control2/HBoxContainer" unique_id=1947075194]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
+mouse_filter = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="MonsterSummonMargin" type="MarginContainer" parent="VBoxContainer/HBoxContainer/MonsterSummonsBackgroun" unique_id=1004981151]
+[node name="MonsterSummonMargin" type="MarginContainer" parent="VBoxContainer/Control2/HBoxContainer/MonsterSummonsBackgroun" unique_id=1004981151]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 12
@@ -150,16 +201,35 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 12
 metadata/_edit_use_anchors_ = true
 
-[node name="MonsterSummonsList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin" unique_id=1816535134]
+[node name="MonsterSummonsList" type="VBoxContainer" parent="VBoxContainer/Control2/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin" unique_id=1816535134]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="AddNewMonster" type="Button" parent="VBoxContainer/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin/MonsterSummonsList" unique_id=1241131103]
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/Control2/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin/MonsterSummonsList" unique_id=788881588]
+layout_mode = 2
+texture_normal = ExtResource("5_fy0d5")
+stretch_mode = 3
+
+[node name="AddNewMonster" type="Button" parent="VBoxContainer/Control2/HBoxContainer/MonsterSummonsBackgroun/MonsterSummonMargin/MonsterSummonsList" unique_id=1241131103]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 8
 text = "+"
 
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer/ManaPool" to="." method="_on_mana_pool_value_changed"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/GlyphGuide" to="." method="_on_glyph_guide_2_gui_input"]
-[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/GlyphGuide" to="." method="_on_glyph_guide_2_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/GlyphGuide" to="." method="_on_glyph_guide_2_mouse_exited"]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=891180753]
+position = Vector2(859, 393)
+texture = ExtResource("6_c5p77")
+region_enabled = true
+region_rect = Rect2(561, 81, 46, 62)
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1567654638]
+disable_3d = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="BattleScene" parent="SubViewport" unique_id=1600235309 instance=ExtResource("3_qkrfw")]
+
+[connection signal="gui_input" from="VBoxContainer/Control2/GlyphGuide" to="." method="_on_glyph_guide_2_gui_input"]
+[connection signal="mouse_entered" from="VBoxContainer/Control2/GlyphGuide" to="." method="_on_glyph_guide_2_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Control2/GlyphGuide" to="." method="_on_glyph_guide_2_mouse_exited"]
+[connection signal="value_changed" from="VBoxContainer/Control2/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer/ManaPool" to="." method="_on_mana_pool_value_changed"]

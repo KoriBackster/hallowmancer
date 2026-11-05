@@ -13,3 +13,6 @@ const ENVIRONMENT_RESPONSE_DIR :StringName = &"/environment_responses"
 const DATA_FILE:StringName = &"/data.tres"
 
 const COMPONENT_DIR:StringName = &"res://Components"
+
+const GAME_SCENE:= "res://test_bin/game_ui.tscn"
+const MENU_SCENE:= "res://Scenes/MainMenu/main_menu.tscn"

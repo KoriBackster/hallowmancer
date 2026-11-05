@@ -36,6 +36,11 @@ folder_colors={
 "res://raw/": "teal"
 }
 
+[gui]
+
+theme/custom="res://test_bin/glyph_state_micro_theme.tres"
+theme/custom_font="res://test_bin/glyphstate_micro.tres"
+
 [input]
 
 move={

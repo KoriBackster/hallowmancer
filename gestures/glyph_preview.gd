@@ -1,5 +1,6 @@
 class_name GlyphPreview extends Line2D
 
+
 # Behaviors of the preview line
 enum Style {
 	# Solid Color
@@ -9,6 +10,7 @@ enum Style {
 	# Flashes glyph -> shows glyphs total state
 	PULSE
 	}
+var preview_mode:bool = false
 
 var data:GlyphPreviewData
 var org_point_list:PackedVector2Array
@@ -17,7 +19,7 @@ var anim_style:Style
 var anim_tw:Tween
 	
 func _ready() -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or not preview_mode:
 		return
 	match anim_style:
 		Style.STATIC, Style.PULSE:
@@ -48,7 +50,7 @@ func reverse_travel_point_list(weight:float):
 	points = new_arr
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or not preview_mode:
 		return
 	#print(anim_style)
 	match anim_style:

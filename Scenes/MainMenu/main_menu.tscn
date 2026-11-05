@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://boyj3uhkxc1gl" path="res://Scenes/MainMenu/main_menu.gd" id="1_0qgbs"]
 [ext_resource type="FontFile" uid="uid://bkinaargo3ivm" path="res://Fonts/Ithaca-LVB75.ttf" id="1_uqdog"]
-[ext_resource type="PackedScene" uid="uid://c8pbhose5sor0" path="res://test_bin/monster_spawning_demo.tscn" id="2_adu2g"]
 [ext_resource type="Texture2D" uid="uid://dngo4n5w7tum" path="res://raw/sprites/zombie.png" id="2_qgdf6"]
 [ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="3_0qgbs"]
-[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://gestures/glyph_guide.tscn" id="6_0l8wx"]
-[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="7_n5jej"]
+[ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="5_omq0y"]
+[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://gestures/glyph_guide.tscn" id="6_0l8wx"]
+[ext_resource type="PackedScene" uid="uid://jdiond8f0ed4" path="res://monster/zombie/scene.tscn" id="8_agesy"]
+[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://gestures/glyph_preview_data.gd" id="8_mdp32"]
+[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="8_rlg4b"]
+[ext_resource type="PackedScene" uid="uid://doe1skrvi61sl" path="res://monster/gremlin/scene.tscn" id="9_mdp32"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
 bg_color = Color(0.13248116, 0.12572935, 0.10756513, 1)
@@ -20,6 +23,259 @@ bg_color = Color(0.21176471, 0.29803923, 0.11372549, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v763k"]
 bg_color = Color(0.21111569, 0.298615, 0.11194473, 1)
 
+[sub_resource type="Resource" id="Resource_rlg4b"]
+resource_local_to_scene = true
+script = ExtResource("8_mdp32")
+style = 1
+data = ExtResource("8_rlg4b")
+scale = Vector2(0.785, 0.785)
+offset = Vector2(-127, -88)
+weight = 2.4
+alpha = 0.4
+metadata/_custom_type_script = "uid://cvojg5v57ctgh"
+
+[sub_resource type="Animation" id="Animation_w5buf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gremlin4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-122, 71)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gremlin2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-190.99994, 217)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gremlin3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-306, 118.99999)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Gremlin3/Skin:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Gremlin3/Skin:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -12)]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Gremlin3/Skin:scale:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Gremlin3/Skin:scale:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Zombie2:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-63, 105)]
+}
+
+[sub_resource type="Animation" id="Animation_6c6cs"]
+resource_name = "chase"
+length = 14.583333
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gremlin4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-122, 71), Vector2(1744, 71)]
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gremlin4/AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("anim/walk"),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gremlin2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-190.99994, 217), Vector2(1675, 217)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Gremlin3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.25, 8.083333, 10),
+"transitions": PackedFloat32Array(1, 1, 1.1892076, 1),
+"update": 0,
+"values": [Vector2(-306, 118.99999), Vector2(502.60004, 118.99999), Vector2(502.60004, 118.99999), Vector2(1746.6, 119)]
+}
+tracks/4/type = "animation"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Gremlin2/AnimationPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": PackedStringArray("anim/walk"),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "animation"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Gremlin3/AnimationPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": PackedStringArray("anim/walk", "anim/idle", "anim/walk"),
+"times": PackedFloat32Array(0, 3.25, 7.5833335)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Gremlin3/Skin:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.08333331, 4, 4.75, 6.1666665, 7.6666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Gremlin3/Skin:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(6.75, 6.916667, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -12), Vector2(0, -19), Vector2(0, -12)]
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = false
+tracks/8/path = NodePath("Gremlin3/Skin:scale:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Gremlin3/Skin:scale:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0, 2),
+"points": PackedFloat32Array(1, 0, 0, 1.138889, 0.20833333, 1, -1.125, -0.041158535, 0.013888916, 0.00050813105, 1.25, -0.25, 0, 0.25, 0, 1, -0.013888836, 0.20833333, 0, 0),
+"times": PackedFloat32Array(0, 6.75, 6.8333335, 6.9166665)
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Zombie2:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 5, 11.733567, 14.416667, 14.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1e-05, 1),
+"update": 0,
+"values": [Vector2(-70, 105), Vector2(-70, 105), Vector2(440, 105), Vector2(440, 105), Vector2(-70, 105)]
+}
+tracks/11/type = "animation"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Zombie2/AnimationPlayer")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"clips": PackedStringArray("anim/idle", "anim/walk", "anim/attack", "anim/idle", "anim/death"),
+"times": PackedFloat32Array(0, 5, 11.75, 12.25, 12.75)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fo6ee"]
+_data = {
+&"RESET": SubResource("Animation_w5buf"),
+&"chase": SubResource("Animation_6c6cs")
+}
+
 [node name="MainMenu" type="Control" unique_id=1472032279]
 texture_filter = 1
 layout_mode = 3
@@ -29,7 +285,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0qgbs")
-first_level = ExtResource("2_adu2g")
 
 [node name="BG" type="Panel" parent="." unique_id=1879751079]
 layout_mode = 1
@@ -46,10 +301,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -288.0
-offset_top = 117.0
-offset_right = 288.0
-offset_bottom = 229.0
+offset_left = -296.0
+offset_top = 164.0
+offset_right = 280.0
+offset_bottom = 276.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_uqdog")
 theme_override_font_sizes/font_size = 128
@@ -79,6 +334,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_v763k")
 text = "Play"
 
 [node name="Zombie" type="TextureRect" parent="." unique_id=1330847054]
+visible = false
 layout_mode = 0
 offset_left = 38.0
 offset_top = 8.0
@@ -86,7 +342,24 @@ offset_right = 280.0
 offset_bottom = 250.0
 texture = ExtResource("2_qgdf6")
 
+[node name="Background" type="TextureRect" parent="." unique_id=1125426290]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("5_omq0y")
+expand_mode = 1
+stretch_mode = 1
+flip_v = true
+
 [node name="Gremlin" type="TextureRect" parent="." unique_id=345077281]
+visible = false
 layout_mode = 0
 offset_left = 807.0
 offset_top = 8.0
@@ -97,16 +370,76 @@ flip_h = true
 
 [node name="GlyphGuide" parent="." unique_id=2076778207 instance=ExtResource("6_0l8wx")]
 layout_mode = 0
-offset_left = 286.0
-offset_top = 230.0
-offset_right = 844.0
-offset_bottom = 584.0
+offset_left = 280.0
+offset_top = 279.0
+offset_right = 838.0
+offset_bottom = 633.0
 expand_mode = 1
-glyph_preview_data = ExtResource("7_n5jej")
-glyph_preview_scale = Vector2(0.66, 0.66)
-glyph_preview_offset = Vector2(-56, -41)
-glyph_preview_weight = 0.83
-glyph_preview_alpha = 0.375
+glyph_preview_data = SubResource("Resource_rlg4b")
+
+[node name="Zombie2" parent="." unique_id=1252615282 instance=ExtResource("8_agesy")]
+position = Vector2(-63, 105)
+scale = Vector2(6, 6)
+metadata/_edit_group_ = true
+
+[node name="ToolNode" parent="Zombie2" index="0" unique_id=347084034]
+monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"oversampling_with_scale":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-63, 105),"rotation":0.0,"scale":Vector2(6, 6),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.2617994,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.7853982,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":Resource("res://monster/monster.gd"),"active_data":Resource("res://monster/zombie/data.tres"),"side":"ATTACKING","environment_responses":Array[Resource("res://monster/monster_response.gd")]([]),"metadata/_edit_group_":true)
+
+
+[node name="AnimationHandler" parent="Zombie2" index="4" unique_id=1931793539]
+enabled = false
+
+[node name="Gremlin2" parent="." unique_id=1537646726 instance=ExtResource("9_mdp32")]
+position = Vector2(-190.99994, 217)
+scale = Vector2(4, 4)
+metadata/_edit_group_ = true
+
+[node name="ToolNode" parent="Gremlin2" index="0" unique_id=347084034]
+monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"oversampling_with_scale":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-190.99994, 217),"rotation":0.0,"scale":Vector2(4, 4),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.2617994,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.7853982,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":Resource("res://monster/monster.gd"),"active_data":Resource("res://monster/gremlin/data.tres"),"side":"ATTACKING","environment_responses":Array[Resource("res://monster/monster_response.gd")]([]),"metadata/_edit_group_":true)
+
+
+[node name="Skin" parent="Gremlin2" index="1" unique_id=1510801558]
+frame = 7
+
+[node name="AnimationHandler" parent="Gremlin2" index="4" unique_id=1931793539]
+enabled = false
+
+[node name="Gremlin3" parent="." unique_id=912792720 instance=ExtResource("9_mdp32")]
+position = Vector2(-306, 118.99999)
+scale = Vector2(4, 4)
+metadata/_edit_group_ = true
+
+[node name="ToolNode" parent="Gremlin3" index="0" unique_id=347084034]
+monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"oversampling_with_scale":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-306, 118.99999),"rotation":0.0,"scale":Vector2(4, 4),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.2617994,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.7853982,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":Resource("res://monster/monster.gd"),"active_data":Resource("res://monster/gremlin/data.tres"),"side":"ATTACKING","environment_responses":Array[Resource("res://monster/monster_response.gd")]([]),"metadata/_edit_group_":true)
+
+
+[node name="Skin" parent="Gremlin3" index="1" unique_id=1510801558]
+frame = 7
+
+[node name="AnimationHandler" parent="Gremlin3" index="4" unique_id=1931793539]
+enabled = false
+
+[node name="Gremlin4" parent="." unique_id=489171318 instance=ExtResource("9_mdp32")]
+position = Vector2(-122, 71)
+scale = Vector2(4, 4)
+metadata/_edit_group_ = true
+
+[node name="ToolNode" parent="Gremlin4" index="0" unique_id=347084034]
+monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"oversampling_with_scale":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-122, 71),"rotation":0.0,"scale":Vector2(4, 4),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.2617994,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.7853982,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":Resource("res://monster/monster.gd"),"active_data":Resource("res://monster/gremlin/data.tres"),"side":"ATTACKING","environment_responses":Array[Resource("res://monster/monster_response.gd")]([]),"metadata/_edit_group_":true)
+
+
+[node name="Skin" parent="Gremlin4" index="1" unique_id=1510801558]
+frame = 7
+
+[node name="AnimationHandler" parent="Gremlin4" index="4" unique_id=1931793539]
+enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1117000347]
+libraries/ = SubResource("AnimationLibrary_fo6ee")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
-[connection signal="glyph_made" from="GlyphGuide" to="." method="_on_glyph_guide_glyph_made"]
+
+[editable path="Zombie2"]
+[editable path="Gremlin2"]
+[editable path="Gremlin3"]
+[editable path="Gremlin4"]

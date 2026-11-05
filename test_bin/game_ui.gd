@@ -2,6 +2,7 @@ extends Control
 @onready var mana_label: Label = %ManaLabel
 @onready var mana_pool: ProgressBar = %ManaPool
 
+@onready var MENU_SCENE:= preload(Config.MENU_SCENE)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,7 +12,9 @@ func _ready() -> void:
 func summoner_glyph_made(glyph:Curve2D):
 	match Gesture.Verify(glyph):
 		"starter":
-			print("HelloWorld")
+			var tree:=get_tree()
+			#tree.unload_current_scene()
+			tree.change_scene_to_packed(load(Config.MENU_SCENE))
 	#print(Gesture.Verify(glyph))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

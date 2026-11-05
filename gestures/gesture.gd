@@ -5,7 +5,7 @@ signal complete(gesture:Curve2D)
 
 var persistant:bool = false
 var gesture:Curve2D
-var line:Line2D
+var line:GlyphPreview
 
 func _input(event:InputEvent)->void:
 
@@ -24,6 +24,10 @@ func _input(event:InputEvent)->void:
 
 func finalize(_output:Curve2D= null):
 	complete.emit(_output)
+	var validity:= is_instance_valid(self)
+	if (validity and is_queued_for_deletion()) or not validity:
+		return
+
 	queue_free()
 
 func _init(persistant_line:bool = false, color:Color=DEFAULT_LINE_COLOR) -> void:
@@ -53,6 +57,7 @@ static func _static_init() -> void:
 static func newLine(color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->GlyphPreview:
 	#var _line:= Line2D.new()
 	var _line := GlyphPreview.new()
+	_line.preview_mode = false
 	_line.default_color = color
 	_line.width = width
 	_line.begin_cap_mode = Line2D.LINE_CAP_BOX
@@ -64,6 +69,7 @@ static func newLineFromGesture(_gesture:Curve2D, resampled:bool = true, color:Co
 	var _line  := newLine(color, width)
 	var point_list := PackedVector2Array(newResample(_gesture)) if resampled else _gesture.get_baked_points()
 	_line.org_point_list = point_list
+	_line.preview_mode = true
 	return _line
 
 static func newResample(_gesture:Curve2D)->PackedVector2Array:
@@ -81,7 +87,7 @@ static func getKnown()->Dictionary[StringName,GestureData]:
 	var known_gestures:Dictionary[StringName, GestureData] = {}
 	var dir := DirAccess.open(GESTURE_DIR + SAVED_GESTURES)
 	for file in dir.get_files():
-		if file.ends_with(".uid"):
+		if not file.ends_with(".tres"):
 			continue
 		known_gestures[file.get_slice(".",0)] = (load(dir.get_current_dir().path_join(file)) as GestureData)
 	return known_gestures

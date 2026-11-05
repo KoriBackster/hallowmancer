@@ -8,17 +8,17 @@
 [sub_resource type="GDScript" id="GDScript_07orm"]
 resource_name = "anim_handler"
 script/source = "extends Node
-
+@export var enabled:bool = true
 @onready var monster_root:Monster2D = get_parent()
 @export var animation_player: AnimationPlayer
 
 func _process(delta: float) -> void:
-	if not animation_player:
+	if not animation_player or not enabled:
 		return
 	if monster_root.velocity.length() > 0.0:
-		animation_player.play(&\"walk\")
+		animation_player.play(&\"anim/walk\")
 	else:
-		animation_player.play(&\"idle\")
+		animation_player.play(&\"anim/idle\")
 "
 
 [node name="MonsterBase" type="CharacterBody2D" unique_id=1716401134]
@@ -38,6 +38,7 @@ vframes = 5
 
 [node name="TESTCOLLISIONSHAPE" type="CollisionShape2D" parent="." unique_id=135234189]
 shape = SubResource("CircleShape2D_bhunq")
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1031852254]
 autoplay = &"idle"
