@@ -2,7 +2,7 @@ class_name GestureData extends Resource
 
 @export var gesture:Curve2D
 
-var resample:Array[Vector2]:
+var resample:PackedVector2Array:
 	get:return Gesture.newResample(gesture)
 		#return resample
 

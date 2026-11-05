@@ -66,8 +66,8 @@ static func newLineFromGesture(_gesture:Curve2D, resampled:bool = true, color:Co
 	_line.org_point_list = point_list
 	return _line
 
-static func newResample(_gesture:Curve2D)->Array[Vector2]:
-	var resampled_points_array:Array[Vector2] = []
+static func newResample(_gesture:Curve2D)->PackedVector2Array:
+	var resampled_points_array:PackedVector2Array = []
 
 	if _gesture.get_baked_length() > 0:
 		var distance_between_points:float = _gesture.get_baked_length() / (RESAMPLE_TARGET - 1) # d = l/(n-1)

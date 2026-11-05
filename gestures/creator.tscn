@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://brp18mbquvxa0"]
 
 [ext_resource type="Script" uid="uid://g01j2dtfe6wr" path="res://gestures/creator.gd" id="1_jyo3s"]
-[ext_resource type="PackedScene" uid="uid://d2lyb2mprqmhn" path="res://gestures/glyph_guide.tscn" id="2_kx6h2"]
+[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://gestures/glyph_guide.tscn" id="2_kx6h2"]
+[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="3_dibbn"]
 
 [node name="GestureCreator" type="Control" unique_id=1836952410]
 layout_mode = 3
@@ -36,9 +37,6 @@ offset_right = 210.0
 offset_bottom = 141.0
 placeholder_text = "Gesture Name"
 
-[node name="GlyphGuide" parent="." unique_id=476362931 instance=ExtResource("2_kx6h2")]
-position = Vector2(521, 328)
-
 [node name="OptionButton" type="OptionButton" parent="." unique_id=1743632887]
 layout_mode = 0
 offset_left = 844.0
@@ -47,3 +45,11 @@ offset_right = 1129.0
 offset_bottom = 596.0
 action_mode = 1
 allow_reselect = true
+
+[node name="GlyphGuide" parent="." unique_id=2076778207 instance=ExtResource("2_kx6h2")]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 117.0
+offset_right = 869.0
+offset_bottom = 629.0
+glyph_preview_data = ExtResource("3_dibbn")

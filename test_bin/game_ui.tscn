@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://va3twi4fulld" path="res://test_bin/game_ui.gd" id="1_cmnmt"]
 [ext_resource type="PackedScene" uid="uid://cngc1j0w7ilg" path="res://test_bin/game_world.tscn" id="3_qkrfw"]
 [ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="3_w2t7v"]
-[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://test_bin/glyph_guide_2.tscn" id="5_3tu4y"]
+[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://gestures/glyph_guide.tscn" id="5_3tu4y"]
 [ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="6_cmnmt"]
 
 [node name="GameUI" type="Control" unique_id=1158969537]

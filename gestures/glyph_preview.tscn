@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxxeydn1a05w6"]
 
-[ext_resource type="Script" uid="uid://cn0chugcosrbw" path="res://glyph_preview.gd" id="1_p03pq"]
+[ext_resource type="Script" uid="uid://cn0chugcosrbw" path="res://gestures/glyph_preview.gd" id="1_p03pq"]
 
 [node name="GlyphPreview" type="Line2D" unique_id=1123502815]
 script = ExtResource("1_p03pq")

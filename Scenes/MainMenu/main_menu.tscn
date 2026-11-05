@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c8pbhose5sor0" path="res://test_bin/monster_spawning_demo.tscn" id="2_adu2g"]
 [ext_resource type="Texture2D" uid="uid://dngo4n5w7tum" path="res://raw/sprites/zombie.png" id="2_qgdf6"]
 [ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="3_0qgbs"]
-[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://test_bin/glyph_guide_2.tscn" id="6_0l8wx"]
+[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://gestures/glyph_guide.tscn" id="6_0l8wx"]
 [ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="7_n5jej"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]

@@ -1,7 +1,16 @@
 class_name GlyphPreview extends Line2D
 
-enum Style { STATIC, TRAVEL, PULSE }
+# Behaviors of the preview line
+enum Style {
+	# Solid Color
+	STATIC, 
+	# Travels the point data -> shows direction of drawing
+	TRAVEL, 
+	# Flashes glyph -> shows glyphs total state
+	PULSE
+	}
 
+var data:GlyphPreviewData
 var org_point_list:PackedVector2Array
 var anim_style:Style
 
@@ -16,6 +25,16 @@ func _ready() -> void:
 	#org_point_list = points
 	#anim_tw = create_tween().set_trans(Tween.TRANS_SINE)
 
+func update_data()->void:
+	if not data.data:
+		return
+	org_point_list = data.data.gesture.get_baked_points()
+	default_color.a = data.alpha
+	anim_style = data.style
+	position = data.offset
+	scale = data.scale
+	width = Gesture.DEFAULT_LINE_WIDTH * data.weight
+	
 func travel_point_list(weight:float):
 	var new_arr:= org_point_list.duplicate()
 	new_arr.resize(int(org_point_list.size() * weight))
