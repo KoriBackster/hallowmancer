@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="GestureData" format=3]
+[gd_resource type="Resource" script_class="GestureData" format=3 uid="uid://bwjcdgrwthx4k"]
 
-[ext_resource type="Script" path="res://gestures/data.gd" id="1_1dnop"]
+[ext_resource type="Script" uid="uid://ccvjkd167yygy" path="res://gestures/data.gd" id="1_1dnop"]
 
 [sub_resource type="Curve2D" id="Curve2D_kwjto"]
 _data = {

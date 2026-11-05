@@ -50,16 +50,20 @@ static func _static_init() -> void:
 	GESTURE_ACCURACY_THRESHOLD = Config.GESTURE_ACCURACY
 	GESTURE_COMPARISON_THRESHOLD = Config.GESTURE_COMPARISON
 
-static func newLine(color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->Line2D:
-	var _line:= Line2D.new()
+static func newLine(color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->GlyphPreview:
+	#var _line:= Line2D.new()
+	var _line := GlyphPreview.new()
 	_line.default_color = color
 	_line.width = width
+	_line.begin_cap_mode = Line2D.LINE_CAP_BOX
+	_line.end_cap_mode = Line2D.LINE_CAP_ROUND
+	
 	return _line
 
-static func newLineFromGesture(_gesture:Curve2D, resampled:bool = true, color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->Line2D:
+static func newLineFromGesture(_gesture:Curve2D, resampled:bool = true, color:Color = DEFAULT_LINE_COLOR, width:float = DEFAULT_LINE_WIDTH)->GlyphPreview:
 	var _line  := newLine(color, width)
 	var point_list := PackedVector2Array(newResample(_gesture)) if resampled else _gesture.get_baked_points()
-	_line.points = point_list
+	_line.org_point_list = point_list
 	return _line
 
 static func newResample(_gesture:Curve2D)->Array[Vector2]:

@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="1_4gh5o"]
 [ext_resource type="Script" uid="uid://va3twi4fulld" path="res://test_bin/game_ui.gd" id="1_cmnmt"]
-[ext_resource type="Texture2D" uid="uid://cty4ci47wvu45" path="res://raw/sprites/GLTYPH.png" id="2_3tu4y"]
 [ext_resource type="PackedScene" uid="uid://cngc1j0w7ilg" path="res://test_bin/game_world.tscn" id="3_qkrfw"]
 [ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="3_w2t7v"]
+[ext_resource type="PackedScene" uid="uid://dobyb22ww5rlj" path="res://test_bin/glyph_guide_2.tscn" id="5_3tu4y"]
+[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="6_cmnmt"]
 
 [node name="GameUI" type="Control" unique_id=1158969537]
 layout_mode = 3
@@ -123,13 +124,17 @@ value = 7.26
 fill_mode = 3
 show_percentage = false
 
-[node name="GlyphGuide2" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=803489564]
+[node name="GlyphGuide" parent="VBoxContainer/HBoxContainer" unique_id=2076778207 instance=ExtResource("5_3tu4y")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-texture = ExtResource("2_3tu4y")
 expand_mode = 3
-stretch_mode = 5
+glyph_preview_data = ExtResource("6_cmnmt")
+glyph_preview_scale = Vector2(0.695, 0.695)
+glyph_preview_offset = Vector2(-78, -56)
+glyph_preview_weight = 2.0
+glyph_preview_alpha = 0.4
 
 [node name="MonsterSummonsBackgroun" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1947075194]
 layout_mode = 2
@@ -155,6 +160,6 @@ layout_mode = 2
 text = "+"
 
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/ManaPanel/MarginContainer/VBoxContainer/ManaPool" to="." method="_on_mana_pool_value_changed"]
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/GlyphGuide2" to="." method="_on_glyph_guide_2_gui_input"]
-[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/GlyphGuide2" to="." method="_on_glyph_guide_2_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/GlyphGuide2" to="." method="_on_glyph_guide_2_mouse_exited"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/GlyphGuide" to="." method="_on_glyph_guide_2_gui_input"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/GlyphGuide" to="." method="_on_glyph_guide_2_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/GlyphGuide" to="." method="_on_glyph_guide_2_mouse_exited"]

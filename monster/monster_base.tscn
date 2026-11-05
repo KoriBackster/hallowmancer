@@ -5,6 +5,22 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 
+[sub_resource type="GDScript" id="GDScript_07orm"]
+resource_name = "anim_handler"
+script/source = "extends Node
+
+@onready var monster_root:Monster2D = get_parent()
+@export var animation_player: AnimationPlayer
+
+func _process(delta: float) -> void:
+	if not animation_player:
+		return
+	if monster_root.velocity.length() > 0.0:
+		animation_player.play(&\"walk\")
+	else:
+		animation_player.play(&\"idle\")
+"
+
 [node name="MonsterBase" type="CharacterBody2D" unique_id=1716401134]
 script = ExtResource("1_a5ngj")
 
@@ -25,3 +41,6 @@ shape = SubResource("CircleShape2D_bhunq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1031852254]
 autoplay = &"idle"
+
+[node name="AnimationHandler" type="Node" parent="." unique_id=1931793539]
+script = SubResource("GDScript_07orm")

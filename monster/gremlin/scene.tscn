@@ -14,7 +14,10 @@ monster_node = Object(CharacterBody2D,"unique_name_in_owner":false,"process_mode
 
 [node name="Skin" parent="." index="1" unique_id=1510801558]
 texture = ExtResource("4_qpsq2")
-frame = 10
+frame = 5
 
 [node name="AnimationPlayer" parent="." index="3" unique_id=1031852254]
 libraries/anim = ExtResource("2_5cu2q")
+
+[node name="AnimationHandler" parent="." index="4" unique_id=1931793539 node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("../AnimationPlayer")

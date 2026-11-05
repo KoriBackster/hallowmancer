@@ -29,7 +29,7 @@ var _preview_gesture:GestureData:
 		for ch in find_children("", "Line2D", true, false):
 			ch.queue_free()
 		if v:
-			add_child(Gesture.newLineFromGesture(v.gesture, true,Color(Gesture.DEFAULT_LINE_COLOR, 0.2),Gesture.DEFAULT_LINE_WIDTH * 0.4))
+			add_child(Gesture.newLineFromGesture(v.gesture, false,Color(Gesture.DEFAULT_LINE_COLOR, 0.2),Gesture.DEFAULT_LINE_WIDTH * 0.4))
 
 func _ready() -> void:
 	if Engine.is_editor_hint():return
