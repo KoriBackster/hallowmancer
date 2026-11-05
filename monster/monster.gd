@@ -31,6 +31,7 @@ func _set_config_by_tag(tag:StringName):
 	environment_responses.assign(CollectResponses(tag))
 
 	%Skin.texture = active_data.texture
+	$RangeComponent/CollisionShape2D.shape.radius = active_data.attack_range
 	# this is the current name of the node responsible for showing the texture, this will change when we add animations and need to replace the basic sprite2D node.
 
 func _add_components(monster: Monster2D) -> void:

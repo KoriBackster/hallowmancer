@@ -4,6 +4,7 @@ class_name NavigationComponent
 @export var movement_component : MovementComponent
 @export var navigation_agent : NavigationAgent2D
 @export var enemy_base : CharacterBody2D # EXPERIMENTAL, MAYBE REMOVED LATER
+@export var behavior_tree : BTPlayer
 
 @onready var target : Vector2 = movement_component.character.global_position
 
@@ -27,13 +28,19 @@ func _process(_delta: float) -> void:
 func set_target(target_node: Node2D) -> void:
 	target = target_node.global_position
 
-func find_nearest_target() -> void: # EXPERIMENTAL
+func find_nearest_target(bt_triggered: bool = false) -> Vector2: # EXPERIMENTAL
 	if not enemy_base:
 		printerr("Enemy base not assigned", self)
-		return
+		return target
 	
-	var closest : Monster2D = null
-	for node in enemy_base.get_children():
+	var closest : CharacterBody2D = null
+	
+	if not enemy_base.find_child("UnitFolder"):
+		printerr("Unit folder not added", enemy_base)
+		return target
+		
+	
+	for node in enemy_base.get_node("UnitFolder").get_children():
 		if not node is Monster2D: continue
 		
 		if closest == null:
@@ -41,5 +48,18 @@ func find_nearest_target() -> void: # EXPERIMENTAL
 			continue
 		elif closest.global_position.distance_to(node.global_position) > closest.global_position.distance_to(target):
 			closest = node
+	if enemy_base.get_node("UnitFolder").get_child_count() <= 0: closest = enemy_base
 			
-	target = closest.global_position
+	if bt_triggered and behavior_tree:
+		target = closest.global_position
+		behavior_tree.blackboard.set_var("NavigationTarget", closest.global_position)
+	return closest.global_position
+
+func reset_target() -> void:
+	target = movement_component.character.global_position
+
+func check_close_to_target() -> bool:
+	var dist = movement_component.character.global_position.distance_to(target)
+	if behavior_tree:
+		behavior_tree.blackboard.set_var("CloseToTarget", dist < 3)
+	return dist < 3

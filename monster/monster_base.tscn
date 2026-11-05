@@ -5,8 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://do8tjrsraeq3c" path="res://Components/health/health_component.tscn" id="3_mrgax"]
 [ext_resource type="PackedScene" uid="uid://yhmluvklodwb" path="res://Components/movement/movement_component.tscn" id="4_bhi4u"]
 [ext_resource type="PackedScene" uid="uid://cxk08qyvnfv6j" path="res://Components/navigation/navigation_component.tscn" id="5_yil1x"]
+[ext_resource type="PackedScene" uid="uid://bi5fj81r8h3kt" path="res://Components/range/range_component.tscn" id="6_bhi4u"]
+[ext_resource type="BehaviorTree" uid="uid://bbsw12ggk646w" path="res://ai/trees/attacking_monster_bt.tres" id="7_yil1x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_m8gkb"]
+var/NavigationComponent/name = &"NavigationComponent"
+var/NavigationComponent/type = 22
+var/NavigationComponent/value = NodePath("../NavigationComponent")
+var/NavigationComponent/hint = 0
+var/NavigationComponent/hint_string = ""
 
 [node name="MonsterBase" type="CharacterBody2D" unique_id=1716401134]
 script = ExtResource("1_a5ngj")
@@ -29,6 +40,18 @@ shape = SubResource("CircleShape2D_bhunq")
 [node name="MovementComponent" parent="." unique_id=1923321293 node_paths=PackedStringArray("character") instance=ExtResource("4_bhi4u")]
 character = NodePath("..")
 
-[node name="NavigationComponent" parent="." unique_id=996777 node_paths=PackedStringArray("movement_component", "navigation_agent") instance=ExtResource("5_yil1x")]
+[node name="NavigationComponent" parent="." unique_id=996777 node_paths=PackedStringArray("movement_component", "navigation_agent", "behavior_tree") instance=ExtResource("5_yil1x")]
 movement_component = NodePath("../MovementComponent")
 navigation_agent = NodePath("../NavigationAgent2D")
+behavior_tree = NodePath("../BTPlayer")
+
+[node name="RangeComponent" parent="." unique_id=270601989 node_paths=PackedStringArray("behavior_tree") instance=ExtResource("6_bhi4u")]
+behavior_tree = NodePath("../BTPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent" unique_id=929924285]
+shape = SubResource("CircleShape2D_riqys")
+debug_color = Color(0.94776434, 0.14764008, 0.44871354, 0.41960785)
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=1925118971]
+behavior_tree = ExtResource("7_yil1x")
+blackboard_plan = SubResource("BlackboardPlan_m8gkb")

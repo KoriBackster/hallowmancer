@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="1_sqd20"]
 [ext_resource type="PackedScene" uid="uid://do8tjrsraeq3c" path="res://Components/health/health_component.tscn" id="2_3k1vj"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+size = Vector2(126, 124)
+
 [node name="Base" type="CharacterBody2D" unique_id=774890665]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=76896149]
@@ -10,3 +13,9 @@ texture = ExtResource("1_sqd20")
 
 [node name="HealthComponent" parent="." unique_id=966977645 instance=ExtResource("2_3k1vj")]
 max_health = 2500.0
+
+[node name="UnitFolder" type="Node2D" parent="." unique_id=1814521281]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=240433847]
+shape = SubResource("RectangleShape2D_bhunq")
+debug_color = Color(0.9093515, 0.0052601136, 0.73362005, 0.41960785)

@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://cvq6ric56hvw7"]
 
 [ext_resource type="PackedScene" uid="uid://cfl5vheb5j6ya" path="res://monster/monster_base.tscn" id="1_08wey"]
-[ext_resource type="Resource" uid="uid://qdt5sckdpa7a" path="res://monster/gremlin/data.tres" id="2_0ixw5"]
-[ext_resource type="BehaviorTree" uid="uid://bbsw12ggk646w" path="res://ai/trees/attacking_monster_bt.tres" id="3_m5wj7"]
 [ext_resource type="PackedScene" uid="uid://bwncuu4coln6x" path="res://Components/selection/selection_component.tscn" id="3_vrvtn"]
 [ext_resource type="Resource" uid="uid://doag0apto34mu" path="res://monster/zombie/data.tres" id="4_qcvog"]
 [ext_resource type="PackedScene" uid="uid://bd6xf2chg60fv" path="res://Scenes/Base/base.tscn" id="7_m5wj7"]
@@ -11,13 +9,6 @@
 vertices = PackedVector2Array(1158.8906, 662.96875, -8, 660.02344, -7.9921875, -3.1171875, 1152.1016, -17.867188)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-18, -13, 1162, -28, 1169, 673, -18, 670)])
-
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_0ixw5"]
-var/NavigationComponent/name = &"NavigationComponent"
-var/NavigationComponent/type = 22
-var/NavigationComponent/value = NodePath("../NavigationComponent")
-var/NavigationComponent/hint = 0
-var/NavigationComponent/hint_string = ""
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
 size = Vector2(1236, 72)
@@ -32,22 +23,16 @@ navigation_polygon = SubResource("NavigationPolygon_bhunq")
 [node name="PlayerBase" parent="." unique_id=774890665 instance=ExtResource("7_m5wj7")]
 position = Vector2(20, 295)
 
-[node name="MonsterBase" parent="PlayerBase" unique_id=1716401134 instance=ExtResource("1_08wey")]
+[node name="MonsterBase" parent="PlayerBase/UnitFolder" parent_id_path=PackedInt32Array(774890665, 1814521281) index="0" unique_id=1716401134 instance=ExtResource("1_08wey")]
 position = Vector2(230, -200)
 active_data = ExtResource("4_qcvog")
-
-[node name="BTPlayer" type="BTPlayer" parent="PlayerBase/MonsterBase" unique_id=1952483458]
-behavior_tree = ExtResource("3_m5wj7")
-blackboard_plan = SubResource("BlackboardPlan_0ixw5")
 
 [node name="EnemyBase" parent="." unique_id=72918334 instance=ExtResource("7_m5wj7")]
 position = Vector2(1148, 300)
 
-[node name="MonsterBase2" parent="EnemyBase" unique_id=1548668148 instance=ExtResource("1_08wey")]
-process_mode = 4
-modulate = Color(0.18039216, 1, 1, 1)
-position = Vector2(-184, -4)
-active_data = ExtResource("2_0ixw5")
+[node name="MonsterBase" parent="EnemyBase/UnitFolder" parent_id_path=PackedInt32Array(72918334, 1814521281) index="0" unique_id=603447264 instance=ExtResource("1_08wey")]
+position = Vector2(-242, -8)
+active_data = ExtResource("4_qcvog")
 side = "DEFENDING"
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=364894934]
@@ -56,3 +41,6 @@ side = "DEFENDING"
 position = Vector2(608, 370)
 shape = SubResource("RectangleShape2D_bhunq")
 debug_color = Color(0.9788212, 0, 0.39689732, 0.41960785)
+
+[editable path="PlayerBase"]
+[editable path="EnemyBase"]

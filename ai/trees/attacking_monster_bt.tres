@@ -6,11 +6,21 @@ var/NavigationComponent/type = 22
 var/NavigationComponent/value = NodePath("MonsterBase/NavigationComponent")
 var/NavigationComponent/hint = 0
 var/NavigationComponent/hint_string = ""
+var/EnemiesBound/name = &"EnemiesBound"
+var/EnemiesBound/type = 1
+var/EnemiesBound/value = false
+var/EnemiesBound/hint = 0
+var/EnemiesBound/hint_string = ""
 var/Continuous/name = &"Continuous"
 var/Continuous/type = 1
 var/Continuous/value = true
 var/Continuous/hint = 0
 var/Continuous/hint_string = ""
+var/CloseToTarget/name = &"CloseToTarget"
+var/CloseToTarget/type = 1
+var/CloseToTarget/value = false
+var/CloseToTarget/hint = 0
+var/CloseToTarget/hint_string = ""
 var/NavigationTarget/name = &"NavigationTarget"
 var/NavigationTarget/type = 5
 var/NavigationTarget/value = Vector2(0, 0)
@@ -26,11 +36,35 @@ resource_name = "true"
 variable = &"Continuous"
 value = SubResource("BBVariant_t4lfu")
 
-[sub_resource type="BTFail" id="BTFail_t4lfu"]
+[sub_resource type="BBVariant" id="BBVariant_ajncp"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_mwwyw"]
+variable = &"EnemiesBound"
+value = SubResource("BBVariant_ajncp")
+
+[sub_resource type="BBNode" id="BBNode_ajncp"]
+saved_value = NodePath("RangeComponent")
+resource_name = "RangeComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_mwwyw"]
+node = SubResource("BBNode_ajncp")
+method = &"check_enemies"
+
+[sub_resource type="BBNode" id="BBNode_q5nes"]
+value_source = 1
+variable = &"NavigationComponent"
+resource_name = "$NavigationComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_v6mso"]
+node = SubResource("BBNode_q5nes")
+method = &"reset_target"
 
 [sub_resource type="BTSequence" id="BTSequence_t4lfu"]
 custom_name = "Attack"
-children = [SubResource("BTFail_t4lfu")]
+children = [SubResource("BTCheckVar_mwwyw"), SubResource("BTCallMethod_mwwyw"), SubResource("BTCallMethod_v6mso")]
 
 [sub_resource type="BBVariant" id="BBVariant_q5nes"]
 saved_value = null
@@ -41,6 +75,19 @@ variable = &"NavigationTarget"
 check_type = 5
 value = SubResource("BBVariant_q5nes")
 
+[sub_resource type="BBNode" id="BBNode_v6mso"]
+saved_value = NodePath("RangeComponent")
+resource_name = "RangeComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_ajncp"]
+node = SubResource("BBNode_v6mso")
+method = &"check_enemies"
+
+[sub_resource type="BBVariant" id="BBVariant_v6mso"]
+type = 1
+saved_value = true
+resource_name = "true"
+
 [sub_resource type="BBNode" id="BBNode_t4lfu"]
 value_source = 1
 variable = &"NavigationComponent"
@@ -49,10 +96,11 @@ resource_name = "$NavigationComponent"
 [sub_resource type="BTCallMethod" id="BTCallMethod_q5nes"]
 node = SubResource("BBNode_t4lfu")
 method = &"find_nearest_target"
+args = Array[BBVariant]([SubResource("BBVariant_v6mso")])
 
 [sub_resource type="BTSequence" id="BTSequence_v6mso"]
 custom_name = "Find New Target"
-children = [SubResource("BTCheckVar_v6mso"), SubResource("BTCallMethod_q5nes")]
+children = [SubResource("BTCheckVar_v6mso"), SubResource("BTCallMethod_ajncp"), SubResource("BTCallMethod_q5nes")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_t4lfu"]
 children = [SubResource("BTSequence_t4lfu"), SubResource("BTSequence_v6mso")]
@@ -61,15 +109,57 @@ children = [SubResource("BTSequence_t4lfu"), SubResource("BTSequence_v6mso")]
 custom_name = "Over"
 children = [SubResource("BTCheckVar_q5nes"), SubResource("BTDynamicSelector_t4lfu")]
 
-[sub_resource type="BTFail" id="BTFail_q5nes"]
+[sub_resource type="BBVariant" id="BBVariant_0s3wq"]
+type = 1
+saved_value = true
+resource_name = "true"
 
-[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_mwwyw"]
+[sub_resource type="BTCheckVar" id="BTCheckVar_1ta0a"]
+variable = &"CloseToTarget"
+check_type = 5
+value = SubResource("BBVariant_0s3wq")
+
+[sub_resource type="BTSequence" id="BTSequence_mwwyw"]
+custom_name = "Retreat"
+children = [SubResource("BTCheckVar_1ta0a")]
+
+[sub_resource type="BBVariant" id="BBVariant_mwwyw"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_0s3wq"]
+variable = &"EnemiesBound"
+value = SubResource("BBVariant_mwwyw")
+
+[sub_resource type="BBNode" id="BBNode_1ta0a"]
+saved_value = NodePath("RangeComponent")
+resource_name = "RangeComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_5xmxq"]
+node = SubResource("BBNode_1ta0a")
+method = &"check_enemies"
+
+[sub_resource type="BBNode" id="BBNode_nqeel"]
+value_source = 1
+variable = &"NavigationComponent"
+resource_name = "$NavigationComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_qg6lj"]
+node = SubResource("BBNode_nqeel")
+method = &"reset_target"
+
+[sub_resource type="BTSequence" id="BTSequence_0s3wq"]
+custom_name = "Attack"
+children = [SubResource("BTCheckVar_0s3wq"), SubResource("BTCallMethod_5xmxq"), SubResource("BTCallMethod_qg6lj")]
+
+[sub_resource type="BTSelector" id="BTSelector_t4lfu"]
 custom_name = "Return"
-children = [SubResource("BTFail_q5nes")]
+children = [SubResource("BTSequence_mwwyw"), SubResource("BTSequence_0s3wq")]
 
 [sub_resource type="BTSelector" id="BTSelector_q5nes"]
 custom_name = "AttackingUnit"
-children = [SubResource("BTSequence_q5nes"), SubResource("BTDynamicSelector_mwwyw")]
+children = [SubResource("BTSequence_q5nes"), SubResource("BTSelector_t4lfu")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_t4lfu")

@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bi5fj81r8h3kt" path="res://Components/range/range_component.tscn" id="2_88lpu"]
 [ext_resource type="AudioStream" uid="uid://dlxhrv06lse26" path="res://raw/audio/gohere.wav" id="3_r1rwd"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
+radius = 20.0
+
 [node name="SelectionComponent" type="Node" unique_id=546658615]
 script = ExtResource("1_rg42a")
 
@@ -12,6 +15,10 @@ collision_layer = 0
 
 [node name="SelectionPolygon" type="Polygon2D" parent="." unique_id=1912360827]
 color = Color(0, 0.808573, 0.81106704, 0.37254903)
+
+[node name="EnemyDetector" type="ShapeCast2D" parent="." unique_id=1617759716]
+shape = SubResource("CircleShape2D_riqys")
+target_position = Vector2(0, 0)
 
 [node name="MoveSound" type="AudioStreamPlayer" parent="." unique_id=1707240221]
 stream = ExtResource("3_r1rwd")

@@ -6,6 +6,7 @@ const MOVE_MARKER = preload("uid://dg5lau3faijus")
 
 @onready var range_component: RangeComponent = $RangeComponent
 @onready var selection_polygon: Polygon2D = $SelectionPolygon
+@onready var enemy_detector: ShapeCast2D = $EnemyDetector
 var current_selection : CollisionShape2D
 var origin : Vector2
 var rect : Rect2
@@ -33,7 +34,6 @@ func _process(_delta: float) -> void:
 		range_component.add_child(new_selection)
 		current_selection = new_selection
 		origin = mouse_pos
-		
 	
 	rect = Rect2(origin, Vector2.ZERO).expand(mouse_pos)
 	current_selection.global_position = rect.get_center()
@@ -59,12 +59,31 @@ func send_target() -> void:
 	if not Input.is_action_just_pressed("move"): return
 	
 	var mouse_pos := range_component.get_global_mouse_position()
+	enemy_detector.global_position = mouse_pos
+	enemy_detector.force_shapecast_update()
 	
-	# Commented this to debug and check out the movement sequence of limboai
-	#for minion : Monster2D in group_selection:
-	#	minion.get_node("NavigationComponent").target = mouse_pos
+	var any_enemies : bool = check_any_enemies()
+	
+	for minion : Monster2D in group_selection:
+		var bt : BTPlayer = minion.get_node("BTPlayer")
+		if not any_enemies:
+			bt.blackboard.set_var("Continuous", false)
+			minion.get_node("NavigationComponent").target = mouse_pos
+		else:
+			bt.blackboard.set_var("Continuous", true)
 	var c_marker = MOVE_MARKER.instantiate()
 	get_tree().current_scene.add_child(c_marker)
 	c_marker.global_position = mouse_pos
 	moved.emit(mouse_pos)
 	$MoveSound.play()
+
+func check_any_enemies() -> bool:
+	var total_enemies : int = enemy_detector.get_collision_count()
+	for target_index : int in total_enemies:
+		var target := enemy_detector.get_collider(target_index)
+		print(target)
+		if not target is Monster2D: return false
+		var unit : Monster2D = target
+		return true if unit.side == "DEFENDING" else false
+	return false
+	
