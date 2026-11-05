@@ -1,6 +1,11 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://bbsw12ggk646w"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_t4lfu"]
+var/AttackComponent/name = &"AttackComponent"
+var/AttackComponent/type = 22
+var/AttackComponent/value = NodePath("")
+var/AttackComponent/hint = 0
+var/AttackComponent/hint_string = ""
 var/NavigationComponent/name = &"NavigationComponent"
 var/NavigationComponent/type = 22
 var/NavigationComponent/value = NodePath("MonsterBase/NavigationComponent")
@@ -21,6 +26,11 @@ var/CloseToTarget/type = 1
 var/CloseToTarget/value = false
 var/CloseToTarget/hint = 0
 var/CloseToTarget/hint_string = ""
+var/SideToAttack/name = &"SideToAttack"
+var/SideToAttack/type = 4
+var/SideToAttack/value = ""
+var/SideToAttack/hint = 0
+var/SideToAttack/hint_string = ""
 var/NavigationTarget/name = &"NavigationTarget"
 var/NavigationTarget/type = 5
 var/NavigationTarget/value = Vector2(0, 0)
@@ -45,6 +55,20 @@ resource_name = "true"
 variable = &"EnemiesBound"
 value = SubResource("BBVariant_ajncp")
 
+[sub_resource type="BBNode" id="BBNode_mwwyw"]
+value_source = 1
+variable = &"AttackComponent"
+resource_name = "$AttackComponent"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_0s3wq"]
+node = SubResource("BBNode_mwwyw")
+method = &"attack"
+
+[sub_resource type="BBVariant" id="BBVariant_1ta0a"]
+value_source = 1
+variable = &"SideToAttack"
+resource_name = "$SideToAttack"
+
 [sub_resource type="BBNode" id="BBNode_ajncp"]
 saved_value = NodePath("RangeComponent")
 resource_name = "RangeComponent"
@@ -52,6 +76,7 @@ resource_name = "RangeComponent"
 [sub_resource type="BTCallMethod" id="BTCallMethod_mwwyw"]
 node = SubResource("BBNode_ajncp")
 method = &"check_enemies"
+args = Array[BBVariant]([SubResource("BBVariant_1ta0a")])
 
 [sub_resource type="BBNode" id="BBNode_q5nes"]
 value_source = 1
@@ -64,7 +89,7 @@ method = &"reset_target"
 
 [sub_resource type="BTSequence" id="BTSequence_t4lfu"]
 custom_name = "Attack"
-children = [SubResource("BTCheckVar_mwwyw"), SubResource("BTCallMethod_mwwyw"), SubResource("BTCallMethod_v6mso")]
+children = [SubResource("BTCheckVar_mwwyw"), SubResource("BTCallMethod_0s3wq"), SubResource("BTCallMethod_mwwyw"), SubResource("BTCallMethod_v6mso")]
 
 [sub_resource type="BBVariant" id="BBVariant_q5nes"]
 saved_value = null
@@ -75,6 +100,12 @@ variable = &"NavigationTarget"
 check_type = 5
 value = SubResource("BBVariant_q5nes")
 
+[sub_resource type="BBVariant" id="BBVariant_5xmxq"]
+type = 4
+value_source = 1
+variable = &"SideToAttack"
+resource_name = "$SideToAttack"
+
 [sub_resource type="BBNode" id="BBNode_v6mso"]
 saved_value = NodePath("RangeComponent")
 resource_name = "RangeComponent"
@@ -82,6 +113,7 @@ resource_name = "RangeComponent"
 [sub_resource type="BTCallMethod" id="BTCallMethod_ajncp"]
 node = SubResource("BBNode_v6mso")
 method = &"check_enemies"
+args = Array[BBVariant]([SubResource("BBVariant_5xmxq")])
 
 [sub_resource type="BBVariant" id="BBVariant_v6mso"]
 type = 1
@@ -132,6 +164,12 @@ resource_name = "true"
 variable = &"EnemiesBound"
 value = SubResource("BBVariant_mwwyw")
 
+[sub_resource type="BBVariant" id="BBVariant_nqeel"]
+type = 4
+value_source = 1
+variable = &"SideToAttack"
+resource_name = "$SideToAttack"
+
 [sub_resource type="BBNode" id="BBNode_1ta0a"]
 saved_value = NodePath("RangeComponent")
 resource_name = "RangeComponent"
@@ -139,6 +177,7 @@ resource_name = "RangeComponent"
 [sub_resource type="BTCallMethod" id="BTCallMethod_5xmxq"]
 node = SubResource("BBNode_1ta0a")
 method = &"check_enemies"
+args = Array[BBVariant]([SubResource("BBVariant_nqeel")])
 
 [sub_resource type="BBNode" id="BBNode_nqeel"]
 value_source = 1

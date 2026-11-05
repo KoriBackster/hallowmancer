@@ -89,3 +89,6 @@ static func CollectResponses(tag:StringName)->Array[monster_response]:
 		var script_instance :monster_response= script_as_resource.new()
 		responses.append(script_instance)
 	return responses
+
+func death() -> void:
+	queue_free()

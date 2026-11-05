@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://q4nvhetr1ydp"]
+
+[ext_resource type="Script" uid="uid://dxns0nk54qjtj" path="res://Components/melee/melee_component.gd" id="1_07f5d"]
+
+[node name="MeleeComponent" type="Node" unique_id=700065051]
+script = ExtResource("1_07f5d")
+
+[node name="AttackCD" type="Timer" parent="." unique_id=321716527]
+one_shot = true

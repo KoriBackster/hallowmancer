@@ -55,3 +55,5 @@ debug_color = Color(0.94776434, 0.14764008, 0.44871354, 0.41960785)
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=1925118971]
 behavior_tree = ExtResource("7_yil1x")
 blackboard_plan = SubResource("BlackboardPlan_m8gkb")
+
+[connection signal="death" from="HealthComponent" to="." method="death"]

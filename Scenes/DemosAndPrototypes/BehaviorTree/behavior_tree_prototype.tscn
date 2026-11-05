@@ -24,14 +24,14 @@ navigation_polygon = SubResource("NavigationPolygon_bhunq")
 position = Vector2(20, 295)
 
 [node name="MonsterBase" parent="PlayerBase/UnitFolder" parent_id_path=PackedInt32Array(774890665, 1814521281) index="0" unique_id=1716401134 instance=ExtResource("1_08wey")]
-position = Vector2(230, -200)
+position = Vector2(119, -200)
 active_data = ExtResource("4_qcvog")
 
 [node name="EnemyBase" parent="." unique_id=72918334 instance=ExtResource("7_m5wj7")]
 position = Vector2(1148, 300)
 
-[node name="MonsterBase" parent="EnemyBase/UnitFolder" parent_id_path=PackedInt32Array(72918334, 1814521281) index="0" unique_id=603447264 instance=ExtResource("1_08wey")]
-position = Vector2(-242, -8)
+[node name="MonsterBase2" parent="EnemyBase/UnitFolder" parent_id_path=PackedInt32Array(72918334, 1814521281) index="0" unique_id=1730112134 instance=ExtResource("1_08wey")]
+position = Vector2(-162, -205)
 active_data = ExtResource("4_qcvog")
 side = "DEFENDING"
 

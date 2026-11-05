@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cxyysklkydxcb"]
+
+[ext_resource type="Script" uid="uid://bfa3jne6nd2kn" path="res://Components/attack/attack_component.gd" id="1_dmavr"]
+
+[node name="AttackComponent" type="Node" unique_id=647207082]
+script = ExtResource("1_dmavr")
+
+[node name="AttackCD" type="Timer" parent="." unique_id=393781780]
+one_shot = true

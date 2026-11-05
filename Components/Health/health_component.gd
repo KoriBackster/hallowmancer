@@ -8,10 +8,14 @@ class_name HealthComponent
 		if new_health > current_health: healed.emit(new_health)
 		else: damaged.emit(new_health)
 		
+		if new_health <= 0:
+			death.emit()
+		
 		current_health = new_health 
 
 signal damaged(new_health)
 signal healed(new_health)
+signal death
 
 func damage(amount: float) -> void:
 	current_health -= amount
