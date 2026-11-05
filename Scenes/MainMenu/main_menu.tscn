@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://d1y7k488krw8v"]
+
+[ext_resource type="Script" uid="uid://boyj3uhkxc1gl" path="res://Scenes/MainMenu/main_menu.gd" id="1_0qgbs"]
+[ext_resource type="FontFile" uid="uid://bkinaargo3ivm" path="res://Fonts/Ithaca-LVB75.ttf" id="1_uqdog"]
+[ext_resource type="PackedScene" uid="uid://c8pbhose5sor0" path="res://test_bin/monster_spawning_demo.tscn" id="2_adu2g"]
+[ext_resource type="Texture2D" uid="uid://dngo4n5w7tum" path="res://raw/sprites/zombie.png" id="2_qgdf6"]
+[ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="3_0qgbs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
+bg_color = Color(0.13248116, 0.12572935, 0.10756513, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbnl2"]
+bg_color = Color(0.4919538, 0.6633252, 0.29736552, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqdog"]
+bg_color = Color(0.21176471, 0.29803923, 0.11372549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v763k"]
+bg_color = Color(0.21111569, 0.298615, 0.11194473, 1)
+
+[node name="MainMenu" type="Control" unique_id=1472032279]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0qgbs")
+first_level = ExtResource("2_adu2g")
+
+[node name="BG" type="Panel" parent="." unique_id=1879751079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bhunq")
+
+[node name="Title" type="Label" parent="." unique_id=1518948680]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.0
+offset_top = 117.0
+offset_right = 288.0
+offset_bottom = 229.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_uqdog")
+theme_override_font_sizes/font_size = 128
+text = "Hallowmancer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="." unique_id=1219840095]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -25.0
+offset_right = 51.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_uqdog")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbnl2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uqdog")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v763k")
+text = "Play"
+
+[node name="Zombie" type="TextureRect" parent="." unique_id=1330847054]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 8.0
+offset_right = 280.0
+offset_bottom = 250.0
+texture = ExtResource("2_qgdf6")
+
+[node name="Gremlin" type="TextureRect" parent="." unique_id=345077281]
+layout_mode = 0
+offset_left = 807.0
+offset_top = 8.0
+offset_right = 1049.0
+offset_bottom = 250.0
+texture = ExtResource("3_0qgbs")
+flip_h = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
