@@ -10,12 +10,12 @@ func _ready() -> void:
 	%GlyphGuide.glyph_made.connect(summoner_glyph_made)
 
 func summoner_glyph_made(glyph:Curve2D):
-	match Gesture.Verify(glyph):
+	match Glyph.Verify(glyph):
 		"starter":
 			var tree:=get_tree()
 			#tree.unload_current_scene()
 			tree.change_scene_to_packed(load(Config.MENU_SCENE))
-	#print(Gesture.Verify(glyph))
+	#print(Glyph.Verify(glyph))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 
 
 #func _on_glyph_guide_2_mouse_entered() -> void:
-	#active_gesture = Gesture.new()
+	#active_gesture = Glyph.new()
 	#active_gesture.complete.connect(summoner_glyph_made)
 	#add_sibling(active_gesture)
 

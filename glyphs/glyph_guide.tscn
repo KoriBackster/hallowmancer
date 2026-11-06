@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cdox7iibprwwi"]
+
+[ext_resource type="Texture2D" uid="uid://cty4ci47wvu45" path="res://raw/sprites/GLTYPH.png" id="1_2gau3"]
+[ext_resource type="Script" uid="uid://ck0j06h872jar" path="res://glyphs/glyph_guide.gd" id="2_hvytp"]
+[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://glyphs/glyph_preview_data.gd" id="3_0wd04"]
+
+[sub_resource type="Resource" id="Resource_iqg7k"]
+resource_local_to_scene = true
+script = ExtResource("3_0wd04")
+offset = Vector2(-200, -60)
+weight = 2.4
+alpha = 0.4
+metadata/_custom_type_script = "uid://cvojg5v57ctgh"
+
+[node name="GlyphGuide" type="TextureRect" unique_id=2076778207]
+offset_right = 648.0
+texture = ExtResource("1_2gau3")
+stretch_mode = 5
+script = ExtResource("2_hvytp")
+glyph_preview_data = SubResource("Resource_iqg7k")

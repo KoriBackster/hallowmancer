@@ -5,7 +5,7 @@ class_name GlyphPreviewData extends Resource
 		style = v
 		emit_changed()
 
-@export var data:GestureData:
+@export var data:GlyphData:
 	set(v):
 		data = v
 		emit_changed()

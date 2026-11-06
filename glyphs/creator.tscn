@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://brp18mbquvxa0"]
 
-[ext_resource type="Script" uid="uid://g01j2dtfe6wr" path="res://gestures/creator.gd" id="1_jyo3s"]
-[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://gestures/glyph_guide.tscn" id="2_kx6h2"]
-[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="3_dibbn"]
+[ext_resource type="Script" uid="uid://g01j2dtfe6wr" path="res://glyphs/creator.gd" id="1_jyo3s"]
+[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://glyphs/glyph_guide.tscn" id="2_kx6h2"]
+[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://glyphs/glyph_preview_data.gd" id="3_dibbn"]
+
+[sub_resource type="Resource" id="Resource_p5hxi"]
+resource_local_to_scene = true
+script = ExtResource("3_dibbn")
+offset = Vector2(-200, -60)
+weight = 2.4
+alpha = 0.4
+metadata/_custom_type_script = "uid://cvojg5v57ctgh"
 
 [node name="GestureCreator" type="Control" unique_id=1836952410]
 layout_mode = 3
@@ -12,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jyo3s")
-preview_gesture = &""
+preview_glyph = &""
 
 [node name="CreateNew" type="Button" parent="." unique_id=1862814145]
 layout_mode = 0
@@ -52,4 +60,4 @@ offset_left = 221.0
 offset_top = 117.0
 offset_right = 869.0
 offset_bottom = 629.0
-glyph_preview_data = ExtResource("3_dibbn")
+glyph_preview_data = SubResource("Resource_p5hxi")

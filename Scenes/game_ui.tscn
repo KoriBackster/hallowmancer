@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://cu8i7nx41rmnh"]
 
 [ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="1_4gh5o"]
-[ext_resource type="Script" uid="uid://va3twi4fulld" path="res://test_bin/game_ui.gd" id="1_cmnmt"]
+[ext_resource type="Script" uid="uid://va3twi4fulld" path="res://Scenes/game_ui.gd" id="1_cmnmt"]
 [ext_resource type="PackedScene" uid="uid://cngc1j0w7ilg" path="res://test_bin/game_world.tscn" id="3_qkrfw"]
 [ext_resource type="Texture2D" uid="uid://dso700xawuj07" path="res://icon.svg" id="3_w2t7v"]
-[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://gestures/glyph_guide.tscn" id="5_3tu4y"]
-[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://gestures/glyph_preview_data.gd" id="5_c5p77"]
+[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://glyphs/glyph_guide.tscn" id="5_3tu4y"]
+[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://glyphs/glyph_preview_data.gd" id="5_c5p77"]
 [ext_resource type="Texture2D" uid="uid://ckofh420ix81u" path="res://raw/sprites/zombie_icon.png" id="5_fy0d5"]
 [ext_resource type="Texture2D" uid="uid://canswtmw6fy5b" path="res://raw/sprites/UI books & more.png" id="6_c5p77"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gc083"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="Resource" id="Resource_ht0hg"]
+[sub_resource type="Resource" id="Resource_c5p77"]
 resource_local_to_scene = true
 script = ExtResource("5_c5p77")
 offset = Vector2(-200, -60)
@@ -134,7 +134,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 mouse_filter = 0
 expand_mode = 3
-glyph_preview_data = SubResource("Resource_ht0hg")
+glyph_preview_data = SubResource("Resource_c5p77")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control2" unique_id=1012712632]
 layout_mode = 1

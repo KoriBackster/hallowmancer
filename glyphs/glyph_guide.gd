@@ -1,10 +1,10 @@
 @tool
 class_name GlyphGuide extends TextureRect
 
-signal glyph_made(gesture:Curve2D)
+signal glyph_made(glyph:Curve2D)
 
 #enum PreviewStyle { BASIC, PULSE, TRAVEL}
-var active_gesture:Gesture
+var active_glyph:Glyph
 
 #@export_storage var previewed_glyph:GlyphPreview
 
@@ -14,7 +14,7 @@ func new_preview(v:GlyphPreviewData)->void:
 	for ch in find_children("", "Line2D", true, false):
 		ch.queue_free()
 	if v and v.data:
-		var glyph_line := Gesture.newLineFromGesture(v.data.gesture, false,Color(Gesture.DEFAULT_LINE_COLOR, v.alpha),Gesture.DEFAULT_LINE_WIDTH * v.weight)
+		var glyph_line := Glyph.newLineFromGlyph(v.data.glyph, false,Color(Glyph.DEFAULT_LINE_COLOR, v.alpha),Glyph.DEFAULT_LINE_WIDTH * v.weight)
 		glyph_line.data = v
 		v.changed.connect(glyph_line.update_data)
 		glyph_line.position = v.offset
@@ -31,11 +31,11 @@ func _ready() -> void:
 	new_preview(glyph_preview_data)
 
 func i_in(event: InputEvent) -> void:
-	if not is_instance_valid(active_gesture):
-		active_gesture = Gesture.new()
-		active_gesture.complete.connect(glyph_made.emit)
-		add_sibling(active_gesture)
+	if not is_instance_valid(active_glyph):
+		active_glyph = Glyph.new()
+		active_glyph.complete.connect(glyph_made.emit)
+		add_sibling(active_glyph)
 
 func m_exit() -> void:
-	if active_gesture:
-		active_gesture.finalize()
+	if active_glyph:
+		active_glyph.finalize()

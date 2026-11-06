@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://doe1skrvi61sl"]
 
-[ext_resource type="PackedScene" uid="uid://cfl5vheb5j6ya" path="res://monster/monster_base.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cfl5vheb5j6ya" path="res://monster/base.tscn" id="1"]
 [ext_resource type="AnimationLibrary" uid="uid://cmioq2uhupc1u" path="res://monster/gremlin/anim.res" id="2_5cu2q"]
 [ext_resource type="Resource" uid="uid://qdt5sckdpa7a" path="res://monster/gremlin/data.tres" id="2_psn1s"]
 [ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="4_qpsq2"]

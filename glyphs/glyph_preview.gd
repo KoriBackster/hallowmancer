@@ -30,12 +30,12 @@ func _ready() -> void:
 func update_data()->void:
 	if not data.data:
 		return
-	org_point_list = data.data.gesture.get_baked_points()
+	org_point_list = data.data.glyph.get_baked_points()
 	default_color.a = data.alpha
 	anim_style = data.style
 	position = data.offset
 	scale = data.scale
-	width = Gesture.DEFAULT_LINE_WIDTH * data.weight
+	width = Glyph.DEFAULT_LINE_WIDTH * data.weight
 	
 func travel_point_list(weight:float):
 	var new_arr:= org_point_list.duplicate()

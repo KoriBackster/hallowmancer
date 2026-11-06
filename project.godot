@@ -38,8 +38,8 @@ folder_colors={
 
 [gui]
 
-theme/custom="res://test_bin/glyph_state_micro_theme.tres"
-theme/custom_font="res://test_bin/glyphstate_micro.tres"
+theme/custom="res://raw/themes/glyph_state_micro_theme.tres"
+theme/custom_font="res://raw/fonts/glyphstate_micro.tres"
 
 [input]
 

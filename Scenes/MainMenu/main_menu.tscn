@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://d1y7k488krw8v"]
 
 [ext_resource type="Script" uid="uid://boyj3uhkxc1gl" path="res://Scenes/MainMenu/main_menu.gd" id="1_0qgbs"]
-[ext_resource type="FontFile" uid="uid://bkinaargo3ivm" path="res://Fonts/Ithaca-LVB75.ttf" id="1_uqdog"]
+[ext_resource type="FontFile" uid="uid://bkinaargo3ivm" path="res://raw/fonts/Ithaca-LVB75.ttf" id="1_uqdog"]
 [ext_resource type="Texture2D" uid="uid://dngo4n5w7tum" path="res://raw/sprites/zombie.png" id="2_qgdf6"]
 [ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="3_0qgbs"]
 [ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="5_omq0y"]
-[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://gestures/glyph_guide.tscn" id="6_0l8wx"]
+[ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://glyphs/glyph_guide.tscn" id="6_0l8wx"]
+[ext_resource type="Script" uid="uid://ccvjkd167yygy" path="res://glyphs/data.gd" id="7_agesy"]
 [ext_resource type="PackedScene" uid="uid://jdiond8f0ed4" path="res://monster/zombie/scene.tscn" id="8_agesy"]
-[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://gestures/glyph_preview_data.gd" id="8_mdp32"]
-[ext_resource type="Resource" uid="uid://b2y3jcjod87bf" path="res://gestures/saved/starter.tres" id="8_rlg4b"]
+[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://glyphs/glyph_preview_data.gd" id="8_mdp32"]
 [ext_resource type="PackedScene" uid="uid://doe1skrvi61sl" path="res://monster/gremlin/scene.tscn" id="9_mdp32"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
@@ -23,11 +23,15 @@ bg_color = Color(0.21176471, 0.29803923, 0.11372549, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v763k"]
 bg_color = Color(0.21111569, 0.298615, 0.11194473, 1)
 
-[sub_resource type="Resource" id="Resource_rlg4b"]
+[sub_resource type="Resource" id="Resource_mdp32"]
+resource_name = "starter"
+script = ExtResource("7_agesy")
+
+[sub_resource type="Resource" id="Resource_agesy"]
 resource_local_to_scene = true
 script = ExtResource("8_mdp32")
 style = 1
-data = ExtResource("8_rlg4b")
+data = SubResource("Resource_mdp32")
 scale = Vector2(0.785, 0.785)
 offset = Vector2(-127, -88)
 weight = 2.4
@@ -375,7 +379,7 @@ offset_top = 279.0
 offset_right = 838.0
 offset_bottom = 633.0
 expand_mode = 1
-glyph_preview_data = SubResource("Resource_rlg4b")
+glyph_preview_data = SubResource("Resource_agesy")
 
 [node name="Zombie2" parent="." unique_id=1252615282 instance=ExtResource("8_agesy")]
 position = Vector2(-63, 105)

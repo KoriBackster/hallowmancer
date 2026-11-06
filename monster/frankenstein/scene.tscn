@@ -1,7 +1,6 @@
+[gd_scene format=3]
 
-	[gd_scene load_steps=2 format=3]
-
-	[ext_resource type="PackedScene" path="res://monster/monster_base.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cfl5vheb5j6ya" path="res://monster/base.tscn" id="1"]
 
 	[node name="Frankenstein" instance=ExtResource("1")]
 	
