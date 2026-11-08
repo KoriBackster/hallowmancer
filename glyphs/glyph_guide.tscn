@@ -7,14 +7,17 @@
 [sub_resource type="Resource" id="Resource_iqg7k"]
 resource_local_to_scene = true
 script = ExtResource("3_0wd04")
-offset = Vector2(-200, -60)
-weight = 2.4
+weight = 2.595
 alpha = 0.4
 metadata/_custom_type_script = "uid://cvojg5v57ctgh"
 
 [node name="GlyphGuide" type="TextureRect" unique_id=2076778207]
 offset_right = 648.0
+offset_bottom = 648.0
 texture = ExtResource("1_2gau3")
+expand_mode = 5
 stretch_mode = 5
 script = ExtResource("2_hvytp")
 glyph_preview_data = SubResource("Resource_iqg7k")
+
+[node name="FatigueTimer" type="Timer" parent="." unique_id=368569570]

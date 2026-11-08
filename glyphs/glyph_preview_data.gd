@@ -1,23 +1,17 @@
+@tool
 class_name GlyphPreviewData extends Resource
 
-@export var style:GlyphPreview.Style=GlyphPreview.Style.STATIC:
-	set(v):
-		style = v
-		emit_changed()
 
 @export var data:GlyphData:
 	set(v):
 		data = v
+		if data and not data.changed.is_connected(emit_changed):
+			data.changed.connect(emit_changed)
 		emit_changed()
 
-@export_custom(PROPERTY_HINT_LINK, "suffix:px") var scale:Vector2 = Vector2.ONE:
+@export var style:GlyphPreview.Style=GlyphPreview.Style.STATIC:
 	set(v):
-		scale = v
-		emit_changed()
-
-@export var offset:Vector2:
-	set(v):
-		offset = v
+		style = v
 		emit_changed()
 
 @export var weight:float = 0.4:

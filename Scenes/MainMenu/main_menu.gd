@@ -1,7 +1,7 @@
 extends Control
 
 #@export var first_level: PackedScene
-@onready var GAME_SCENE:= preload(Config.GAME_SCENE)
+#@onready var GAME_SCENE:PackedScene= preload(Config.GAME_SCENE)
 @onready var anim_pl:= $AnimationPlayer
 
 func _ready() -> void:
@@ -18,9 +18,11 @@ func queue_animation()->void:
 		)
 
 func _on_glyph_guide_glyph_made(glyph: Curve2D) -> void:
+
 	match Glyph.Verify(glyph):
 		&"starter":
 			var tree:= get_tree()
-		
 			#tree.unload_current_scene()
 			tree.change_scene_to_packed(load(Config.GAME_SCENE))
+		&"linker":
+			print(Monster2D.find_exclusive(["zombie"]))

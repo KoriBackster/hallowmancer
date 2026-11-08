@@ -15,8 +15,8 @@ const SAVED_GLYPH_DIR:StringName = GLYPH_DIR + &"/saved"
 const GLYPH_RESAMPLE:int = 12
 const GLYPH_COLOR:Color = Color.RED
 const GLYPH_WEIGHT:float = 5.0
-const GLYPH_ACCURACY:float = 0.5
-const GLYPH_COMPARISON:float = 0.2
+const GLYPH_ACCURACY:float = 0.7
+const GLYPH_COMPARISON:float = 0.5
 
 #endregion
 
@@ -24,14 +24,9 @@ const GLYPH_COMPARISON:float = 0.2
 
 const MONSTER_DIR := &"res://monster"
 const MONSTER_BASE_FILE := MONSTER_DIR + &"/base.tscn"
+const MONSTER_COMPONENT_DIR:= &"res://Components"
 
 const MONSTER_RESPONSE_DIR:= &"/environment_responses"
 const MONSTER_DATA_FILE:= &"/data.tres"
-
-#endregion
-
-#region Components
-
-const COMPONENT_DIR:= &"res://Components"
 
 #endregion

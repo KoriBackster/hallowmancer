@@ -12,7 +12,7 @@ script/source = "extends Node
 @onready var monster_root:Monster2D = get_parent()
 @export var animation_player: AnimationPlayer
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not animation_player or not enabled:
 		return
 	if monster_root.velocity.length() > 0.0:

@@ -5,6 +5,7 @@ extends Control
 @onready var create_new: Button = $CreateNew
 @onready var glyph_name_insert:LineEdit = $NewName
 @onready var preview_options:OptionButton = $OptionButton
+@onready var delete_button:Button = $Delete
 #@export var glyph_name:StringName
 @export var preview_glyph:Variant:
 	set(v):
@@ -29,15 +30,18 @@ var _preview_glyph:GlyphData:
 		for ch in find_children("", "Line2D", true, false):
 			ch.queue_free()
 		if v:
-			add_child(Glyph.newLineFromGlyph(v.glyph, false,Color(Glyph.DEFAULT_LINE_COLOR, 0.2),Glyph.DEFAULT_LINE_WIDTH * 0.4))
+			add_child(Glyph.newPreviewFromGlyph(v.glyph, false,Color(Glyph.DEFAULT_LINE_COLOR, 0.2),Glyph.DEFAULT_LINE_WIDTH * 0.4))
 
 func _ready() -> void:
 	if Engine.is_editor_hint():return
+	glyph_name_insert.text_submitted.connect(create_new.pressed.emit.unbind(1))
 	create_new.pressed.connect(
 		func():
-			if glyph_name_insert.text.is_empty() or Glyph.getKnown().keys().has(glyph_name_insert.text):
+			if glyph_name_insert.text.is_empty():
 				print("invalid name")
 				return
+			elif Glyph.getKnown().keys().has(glyph_name_insert.text):
+				print("Overriding existing resource")
 			create_new.disabled = true
 			start_test.disabled = true
 
@@ -50,6 +54,7 @@ func _ready() -> void:
 				active_glyph = null
 				create_new.disabled = false
 				start_test.disabled = false
+				glyph_name_insert.edit()
 				)
 			add_sibling(glyph)
 	)
@@ -70,7 +75,7 @@ func _ready() -> void:
 		
 		var known_glyphs:= Glyph.getKnown()
 		for glyph_ind in range(known_glyphs.keys().size()):
-			preview_options.add_item(known_glyphs.keys()[glyph_ind], glyph_ind)
+			preview_options.add_item(known_glyphs.keys()[glyph_ind])
 		
 		preview_options.select(-1)
 		_preview_glyph = null
@@ -84,6 +89,19 @@ func _ready() -> void:
 			#return
 		print(selected)
 		_preview_glyph = Glyph.getKnown()[selected]
+		delete_button.visible = v != -1
+		)
+	delete_button.pressed.connect(func():
+		var selected:=preview_options.get_selectable_item()
+		var deletion_target :StringName = &"" if selected == -1 else preview_options.get_item_text(selected)
+		if deletion_target.is_empty():
+			print("Deletion of target node failed.")
+			return
+		var dir := DirAccess.open(Config.SAVED_GLYPH_DIR)
+		for file in dir.get_files():
+			if not file.begins_with(deletion_target):
+				continue
+			dir.remove(file)
 		)
 
 

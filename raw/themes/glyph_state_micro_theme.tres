@@ -1,6 +1,6 @@
-[gd_resource type="Theme" format=3]
+[gd_resource type="Theme" format=3 uid="uid://us3fk66vc13m"]
 
-[ext_resource type="FontFile" path="../raw/ui/glyphstate_micro.tres" id="1_micro"]
+[ext_resource type="FontFile" path="res://raw/fonts/glyphstate_micro.tres" id="1_micro"]
 
 [resource]
 default_font = ExtResource("1_micro")

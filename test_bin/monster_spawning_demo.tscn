@@ -50,7 +50,7 @@ func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
 	# the monster's folder name is always snake_case; see String.to_snake_case()
 	tag = tag.to_snake_case()
 	# Example of spawning a monster manually using their tag
-	var new_monster:Monster2D = Monster2D.MONSTER_BASE_SCENE.instantiate()
+	var new_monster:Monster2D = load(Monster2D.BASE_SCENE).instantiate()
 	new_monster._set_config_by_tag(tag)
 	
 	#var inherited_scene_path := Monster2D.MONSTER_DIR.path_join(\"monster_base.tscn\")

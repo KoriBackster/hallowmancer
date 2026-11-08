@@ -17,7 +17,7 @@ signal interaction(Tag:StringName)
 @export var active_data:MonsterData
 var t_dir:Vector2
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	velocity = t_dir * active_data.speed
 	move_and_slide()
 func spawn()->void:
@@ -26,7 +26,7 @@ func spawn()->void:
 func die()->void:
 	death.emit()
 
-func take_step(over:int,fps:int)->void:
+func take_step(_over:int,_fps:int)->void:
 	pass
 
 func deal_damage()->void:
@@ -46,10 +46,11 @@ func _set_config_by_tag(tag:StringName):
 	if not dir.dir_exists(tag):
 		active_data = null
 		environment_responses.clear()
-		%Skin.texture = null
+		_update()
+		#%Skin.texture = null
 		return
 
-	var monster_data := ResourceLoader.load(MONSTER_DIR.path_join(tag) + DATA_FILE, "MonsterData")
+	var monster_data :MonsterData = ResourceLoader.load(MONSTER_DIR.path_join(tag) + DATA_FILE, "MonsterData")
 	#print(MONSTER_DIR.path_join(tag) + DATA_FILE)
 	active_data = monster_data
 	environment_responses.assign(collectResponses(tag))
@@ -68,37 +69,91 @@ func _set_config_by_tag(tag:StringName):
 					add_child(inst_comp)
 	
 	name = active_data.tag.to_pascal_case()
-	%Skin.texture = active_data.texture
+	_update()
+	#%Skin.texture = active_data.texture
 
+func _update():
+	pass
 
-static var MONSTER_DIR :StringName = &"res://monster"
-static var MONSTER_BASE_SCENE :PackedScene = load(MONSTER_DIR + "/monster_base.tscn")
-static var ENVIRONMENT_RESPONSE_DIR :StringName = &"/environment_responses"
-static var DATA_FILE:StringName = &"/data.tres"
+func _enter_tree() -> void:
+	all.append(self)
 
-static var COMPONENT_DIR:StringName = &"res://Components"
-#const DEFAULT_UNIT_TAG:StringName = &"gremlin"
+func _exit_tree() -> void:
+	all.erase(self)
+
+#region Class Functions
+static var MONSTER_DIR: StringName = Config.MONSTER_DIR
+static var COMPONENT_DIR: StringName = Config.MONSTER_COMPONENT_DIR
+static var BASE_SCENE: StringName = Config.MONSTER_BASE_FILE
+static var ENVIRONMENT_RESPONSE_DIR: StringName = Config.MONSTER_RESPONSE_DIR
+static var DATA_FILE: StringName = Config.MONSTER_DATA_FILE
+
+static var all:Array[Monster2D] = []
+
+static var filterDB:Dictionary[StringName,Callable] = {
+	"zombie": func(_e:Monster2D)->bool: return _e.active_data.tag == "zombie",
+	"gremlin": func(_e:Monster2D)->bool:return _e.active_data.tag == "gremlin",
+	
+}
 
 static func _static_init() -> void:
 	MONSTER_DIR = Config.MONSTER_DIR
-	MONSTER_BASE_SCENE = Config.MONSTER_BASE_SCENE
-	ENVIRONMENT_RESPONSE_DIR = Config.ENVIRONMENT_RESPONSE_DIR
-	DATA_FILE = Config.DATA_FILE
+	BASE_SCENE = Config.MONSTER_BASE_FILE
+	ENVIRONMENT_RESPONSE_DIR = Config.MONSTER_RESPONSE_DIR
+	DATA_FILE = Config.MONSTER_DATA_FILE
 	
-	COMPONENT_DIR = Config.COMPONENT_DIR
+	COMPONENT_DIR = Config.MONSTER_COMPONENT_DIR
 
+# Returns a list of monsters that fit ALL filters
+static func find_exclusive(filter_tag_list:Array[StringName] = [], custom_filter_list:Array[Callable]=[])->Array[Monster2D]:
+	#return all.filter(filterDB.get(filter_tag), func(_e)->bool:return false)
+	var ret :Array[Monster2D]= all.duplicate()
+	var filter_used:bool = false
+	
+	for tag in filter_tag_list:
+		if ret.is_empty():
+			break
+		if tag.is_empty():
+			continue
+		filter_used = true
+		ret = ret.filter(filterDB.get(tag, func(_e)->bool:return false))
+	for filter in custom_filter_list:
+		if ret.is_empty():
+			break
+		if filter.is_valid():
+			filter_used = true
+			ret = ret.filter(filter)
+	return ret if filter_used else []
+
+# Returns a list of monsters that fit ANY filter
+static func find_inclusive(filter_tag_list:Array[StringName]=[], custom_filter_list:Array[Callable]=[])->Array[Monster2D]:
+	var ret :Array[Monster2D]= []
+	
+	var is_needed_filter:Callable = func(monst:Monster2D, second_filter:Callable)->bool: return (not monst in ret) and second_filter.call(monst)
+	for tag in filter_tag_list:
+		#var new_m:Array[Monster2D] = []
+		if tag.is_empty() or not filterDB.has(tag):
+			continue
+		ret.append_array(all.filter(is_needed_filter.bind(filterDB.get(tag, func(_e)->bool:return false))))
+		#ret.append_array(all.filter(filterDB.get([tag], func(_e)->bool:return false)))
+	for filter in custom_filter_list:
+		#var new_m:Array[Monster2D] = []
+		if filter.is_valid():
+			ret.append_array(all.filter(is_needed_filter.bind(filter)))
+	
+	return ret
 
 static func newZombie(_summoner:StringName = &"") -> Monster2D:
 	#const tag:StringName = "zombie"
-	var new_monster:Monster2D = MONSTER_BASE_SCENE.instantiate()
-	new_monster._set_config_by_tag("zombie")
+	var new_monster:Monster2D = load(BASE_SCENE).instantiate()
+	new_monster._set_config_by_tag(&"zombie")
 	new_monster.summoner = _summoner
 	return new_monster
 
 static func newGremlin(_summoner:StringName = &"")->Monster2D:
 	#const tag:StringName = "gremlin"
-	var new_m:Monster2D = MONSTER_BASE_SCENE.instantiate()
-	new_m._set_config_by_tag("gremlin")
+	var new_m:Monster2D = load(BASE_SCENE).instantiate()
+	new_m._set_config_by_tag(&"gremlin")
 	new_m.summoner = _summoner
 	return new_m
 
@@ -130,3 +185,4 @@ static func collectResponses(tag:StringName)->Array[monster_response]:
 		var script_instance :monster_response= script_as_resource.new()
 		responses.append(script_instance)
 	return responses
+#endregion

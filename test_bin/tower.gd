@@ -4,7 +4,7 @@ extends Sprite2D
 
 var spawn_sequence
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not is_instance_valid(spawn_sequence):
 		do_spawn()
 
