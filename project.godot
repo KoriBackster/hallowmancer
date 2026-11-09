@@ -13,7 +13,11 @@ config_version=5
 config/name="Hallowmancer"
 run/main_scene="uid://bmtyrvpc7qaae"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.8862745, 0.41960785, 0.07450981, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://cqrtntoe1gg4l"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
 
 [autoload]
 

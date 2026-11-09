@@ -9,6 +9,7 @@ const DEFAULT_SIZE:Vector2=Vector2.ONE * 648
 #@export_storage var previewed_glyph:GlyphPreview
 
 @export var glyph_preview_data:GlyphPreviewData
+
 @onready var glyph_fatigue:Timer = $FatigueTimer
 
 func new_preview()->void:

@@ -6,9 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpgafcqrkejqn" path="res://raw/sprites/gremlin.png" id="3_0qgbs"]
 [ext_resource type="Texture2D" uid="uid://cu1x50qic4di2" path="res://raw/sprites/Cherry_Planks_basecolor.png" id="5_omq0y"]
 [ext_resource type="PackedScene" uid="uid://cdox7iibprwwi" path="res://glyphs/glyph_guide.tscn" id="6_0l8wx"]
-[ext_resource type="Resource" uid="uid://chtwi8jrnwydq" path="res://glyphs/saved/linker.tres" id="7_agesy"]
 [ext_resource type="PackedScene" uid="uid://jdiond8f0ed4" path="res://monster/zombie/scene.tscn" id="8_agesy"]
-[ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://glyphs/glyph_preview_data.gd" id="8_mdp32"]
 [ext_resource type="PackedScene" uid="uid://doe1skrvi61sl" path="res://monster/gremlin/scene.tscn" id="9_mdp32"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
@@ -22,14 +20,6 @@ bg_color = Color(0.21176471, 0.29803923, 0.11372549, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v763k"]
 bg_color = Color(0.21111569, 0.298615, 0.11194473, 1)
-
-[sub_resource type="Resource" id="Resource_agesy"]
-resource_local_to_scene = true
-script = ExtResource("8_mdp32")
-data = ExtResource("7_agesy")
-weight = 2.505
-alpha = 0.4
-metadata/_custom_type_script = "uid://cvojg5v57ctgh"
 
 [sub_resource type="Animation" id="Animation_w5buf"]
 length = 0.001
@@ -372,7 +362,6 @@ offset_top = 276.0
 offset_right = 1032.0
 offset_bottom = 924.0
 scale = Vector2(0.48, 0.48)
-glyph_preview_data = SubResource("Resource_agesy")
 
 [node name="Zombie2" parent="." unique_id=1252615282 instance=ExtResource("8_agesy")]
 position = Vector2(-63, 105)

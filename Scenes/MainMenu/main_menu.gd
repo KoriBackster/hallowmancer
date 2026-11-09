@@ -7,7 +7,7 @@ extends Control
 func _ready() -> void:
 	queue_animation()
 	$GlyphGuide.glyph_made.connect(_on_glyph_guide_glyph_made)
-	
+
 	anim_pl.animation_finished.connect(queue_animation.unbind(1))
 
 

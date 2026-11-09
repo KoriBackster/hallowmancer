@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cvojg5v57ctgh" path="res://glyphs/glyph_preview_data.gd" id="3_dibbn"]
 [ext_resource type="Resource" uid="uid://chtwi8jrnwydq" path="res://glyphs/saved/linker.tres" id="3_glfks"]
 
-[sub_resource type="Resource" id="Resource_mpege"]
+[sub_resource type="Resource" id="Resource_glfks"]
 resource_local_to_scene = true
 script = ExtResource("3_dibbn")
 data = ExtResource("3_glfks")
@@ -63,7 +63,7 @@ offset_top = 162.0
 offset_right = 914.0
 offset_bottom = 810.0
 scale = Vector2(0.765, 0.765)
-glyph_preview_data = SubResource("Resource_mpege")
+glyph_preview_data = SubResource("Resource_glfks")
 
 [node name="Delete" type="Button" parent="." unique_id=1533650470]
 visible = false

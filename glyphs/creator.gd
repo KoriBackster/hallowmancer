@@ -68,15 +68,15 @@ func _ready() -> void:
 				ch.queue_free()
 			)
 	preview_options.pressed.connect(func():
-		
+
 		#var selected:= preview_options.get_selectable_item()
 		preview_options.clear()
-		
-		
+
+
 		var known_glyphs:= Glyph.getKnown()
 		for glyph_ind in range(known_glyphs.keys().size()):
 			preview_options.add_item(known_glyphs.keys()[glyph_ind])
-		
+
 		preview_options.select(-1)
 		_preview_glyph = null
 		)

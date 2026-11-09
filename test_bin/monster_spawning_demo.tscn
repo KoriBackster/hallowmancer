@@ -13,26 +13,26 @@ func _ready() -> void:
 		var available_monsters:= Monster2D.getMonsterList()
 		for title in available_monsters:
 			monster_spawn_options.add_item(title.to_pascal_case())
-		
+
 		monster_spawn_options.select(-1)
 		)
-		
-	
+
+
 	monster_spawn_options.item_selected.connect(func(v):
 		for ch in get_tree().root.find_children(\"\", \"Monster2D\", true, false):
 			#print(ch.name)
 			ch.queue_free()
 		var selected_monster_name:= monster_spawn_options.get_item_text(v)
-		
+
 		example_of_manually_creating_a_monster_by_their_tag(selected_monster_name)
-		
+
 		)
 
 func example_of_creating_a_monster_via_macro(tag:StringName)->void:
 	# The monster tag would be irrelavent in the case of spawning as it is handled by the macro.
 	# the function simply takes the tag to make intent clear
 	tag = tag.to_snake_case()
-	
+
 	var new_monster:Monster2D
 	# Example of spawning a monster using the macro
 	match tag:
@@ -40,10 +40,10 @@ func example_of_creating_a_monster_via_macro(tag:StringName)->void:
 			new_monster = Monster2D.newZombie()
 		\"gremlin\":
 			new_monster = Monster2D.newGremlin()
-	
+
 	new_monster.global_position = marker.global_position
 	add_child(new_monster)
-	
+
 
 func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
 	# The monster name needs to be identical to the monster's folder name...
@@ -52,7 +52,7 @@ func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
 	# Example of spawning a monster manually using their tag
 	var new_monster:Monster2D = load(Monster2D.BASE_SCENE).instantiate()
 	new_monster._set_config_by_tag(tag)
-	
+
 	#var inherited_scene_path := Monster2D.MONSTER_DIR.path_join(\"monster_base.tscn\")
 	#var new_scene_path := Monster2D.MONSTER_DIR.path_join(tag).path_join(\"scene.tscn\")
 
@@ -78,7 +78,7 @@ func example_of_manually_creating_a_monster_by_their_tag(tag:StringName)->void:
 	#custom_scene.pack(new_monster)
 	##custom_scene.
 	#ResourceSaver.save(custom_scene, Monster2D.MONSTER_DIR.path_join(tag).path_join(\"scene.tscn\"))
-	
+
 	new_monster.global_position = marker.global_position
 	add_child(new_monster)
 "
